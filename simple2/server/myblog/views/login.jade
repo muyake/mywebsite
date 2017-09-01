@@ -1,0 +1,18 @@
+extends layout
+block content  
+    script(type="text/javascript",src='javascripts/login.js')
+    div.form-horizontal
+        fieldset
+            legend  登录
+            div.control-group
+                label.control-label(for='username') 用户名
+                div.controls
+                    input.input-xlarge#username(name='username',type='text')
+                    p.help-block.displayNONE#name-alert
+            div.control-group
+                label.control-label(for='password') 密码
+                div.controls
+                    input.input-xlarge#password(name='password',type='password')
+                    p.help-block.displayNONE#pw-alert
+            div.form-actions
+                button.btn.btn-primary#submit 登录  
