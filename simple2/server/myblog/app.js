@@ -26,6 +26,9 @@ app.use(session({
 var language = require('./models/language'); //多语言
 var internation = new language();
 internation.set(app);
+
+//var loginInfo== require('./models/language'); //查看登录信息。
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

@@ -86,8 +86,11 @@ internation.prototype.set = function(app) {
 
         //下面两个因为要调用req和res，所以特殊设置
         res.locals.user = function() {
-            if ('session' in req && 'user' in req.session)
+            if ('session' in req && 'user' in req.session){
+                  res.locals.username=req.session.username;
                 return req.session.user;
+            }
+              
             else
                 return null;
         };

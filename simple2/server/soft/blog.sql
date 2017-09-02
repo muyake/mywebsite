@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50051
+Source Server         : localhost_3306
+Source Server Version : 50717
 Source Host           : localhost:3306
-Source Database       : microblog
+Source Database       : blog
 
 Target Server Type    : MYSQL
-Target Server Version : 50051
+Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2013-09-17 01:37:13
+Date: 2017-09-02 10:01:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -22,9 +22,9 @@ DROP TABLE IF EXISTS `post`;
 CREATE TABLE `post` (
   `id` varchar(36) NOT NULL,
   `user` varchar(30) NOT NULL,
-  `post` varchar(200) default NULL,
-  `time` datetime default NULL,
-  PRIMARY KEY  (`id`)
+  `post` varchar(200) DEFAULT NULL,
+  `time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -37,18 +37,34 @@ INSERT INTO `post` VALUES ('677f0984-ce58-4878-b953-8f3d07bd6564', 'tom', 'grege
 INSERT INTO `post` VALUES ('9f3a75bc-dc5f-4041-930c-b15ba8f3a656', 'tom', 'gegerggergerg', '2013-09-17 01:05:33');
 
 -- ----------------------------
+-- Table structure for `text`
+-- ----------------------------
+DROP TABLE IF EXISTS `text`;
+CREATE TABLE `text` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` varchar(255) NOT NULL,
+  `text` text NOT NULL,
+  `ctime` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of text
+-- ----------------------------
+INSERT INTO `text` VALUES ('1', 'aa', ' asdfasd', '2017-09-02');
+
+-- ----------------------------
 -- Table structure for `user`
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-  `id` varchar(36) NOT NULL,
+  `id` int(36) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
   `password` varchar(60) NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('f822edbe-47aa-4ebf-b9c4-169fda471987', 'JakyKing', 'ICy5YqxZB1uWSwcVLSNLcA==');
-INSERT INTO `user` VALUES ('8bdf32ae-4ae3-4ea8-bd15-871e9d9c7565', 'tom', 'ICy5YqxZB1uWSwcVLSNLcA==');
+INSERT INTO `user` VALUES ('1', 'aa', 'QSS8CpM1wn8IbyS6IHpJEg==');
