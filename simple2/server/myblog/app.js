@@ -13,6 +13,8 @@ var lan = require('./routes/language');
 var logout = require('./routes/logout');
 var postBlog = require('./routes/post');
 var userManager = require('./routes/userManager');
+
+var inventory = require('./routes/inventory');
 //var getUserList = require('./routes/getUserList');
 var app = express();
 //session  
@@ -46,9 +48,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 //路由的处理
 app.use('/login', checkNotLogin);
 app.use('/reg', checkNotLogin);
-
+app.use('/reg', checkNotLogin);
 //必须在已登录情况下才能访问
-app.use('/logout', checkLogin);
+
 //未登录检测（已登录情况下执行）
 function checkNotLogin(req, res, next) {
 	if (req.session.user) {
@@ -67,7 +69,7 @@ function checkLogin(req, res, next) {
 }
 
 
-
+app.use('/inventory', inventory);
 app.use('/logout', logout); //登出 
 app.use('/userManager', userManager); //用户管理
 app.use('/language', lan); //切换语言的

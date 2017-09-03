@@ -1,0 +1,24 @@
+.navbar .nav{
+    float:right;
+}
+.addBtn{
+    float: right;
+}
+.table th, .table td{
+    text-align: center;
+    vertical-align: middle;
+}
+.form-group{
+    margin-top: 8px;
+}
+.form-horizontal .control-label{
+    margin-right: 5px;
+}
+.displayInline{
+    display: inline-block;
+    visibility:hidden;
+    color:#b94a48;
+}
+.form-horizontal .control-label{
+    line-height: 34px;
+}

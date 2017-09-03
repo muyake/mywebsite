@@ -1,0 +1,170 @@
+<!DOCTYPE html  >
+<html>
+
+<head>
+    <title>物流管理系统</title>
+    <link rel="stylesheet" href="../stylesheets/bootstrapcss/bootstrap.min.css" />
+    <link rel="stylesheet" href="../stylesheets/blog.css" />
+    <link rel="stylesheet" href="../stylesheets/main.css" />
+    <script type="text/javascript" src="../javascripts/jq.js"></script>
+    <script type="text/javascript" src="../javascripts/bootstrapjs/bootstrap.min.js"></script>
+    <script src="../javascripts/lib/laydate.js"></script>
+</head>
+
+<body>
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container"><a data-toggle="collapse" data-target=".nav-collapse" class="btn btn-navbar"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a href="/" class="brand">物流管理系统</a>
+                <div class="nav-collapse">
+                    <ul class="nav">
+                        <!--以下是修改后的部分-->
+                        <li><a href="javascript:void(0)" style="cursor:default">三和物流</a></li>
+                        <li><a href="/login">退出</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="contrainer" class="container">
+        <div class="btnList">
+            <form class="form-inline" role="form">
+                <div class="form-group">
+                    <label class="sr-only" for="searchTime">时间：</label>
+                    <input type="text" id="searchTime">
+                    <button type="button" class="btn btn-primary searchBtn">查询</button>
+                    <button type="button" class="btn btn-primary showAllBtn">显示全部</button>
+                    <button type="button" class="btn btn-primary addBtn">增加</button>
+                </div>
+            </form>
+        </div>
+        <div class="tableContainer">
+            <table class="table table-hover userTable">
+                <thead>
+                    <tr>
+                        <th>日期</th>
+                        <th>到站</th>
+                        <th>收货人姓名</th>
+                        <th>电话</th>
+                        <th>中转站</th>
+                        <th>中转站电话</th>
+                        <th>运费</th>
+                        <th colspan="2">编辑</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr>
+                <td>日期</td>
+                        <td>到站</td>
+                        <td>收货人姓名</td>
+                        <td>电话</td>
+                        <td>中转站</td>
+                        <td>中转站电话</td>
+                        <td>运费</td>
+                        <td>
+                        <button type="button" class="btn btn-default  btn-sm" style="margin-right:15px;">编辑</button>
+                        </td>
+                        <td>
+                        <button type="button" class="btn btn-default  btn-sm" style="margin-right:15px;">删除</button>
+                        </td>
+                </tr>
+                  <tr>
+                <td>日期</td>
+                        <td>到站</td>
+                        <td>收货人姓名</td>
+                        <td>电话</td>
+                        <td>中转站</td>
+                        <td>中转站电话</td>
+                        <td>运费</td>
+                        <td>
+                        <button type="button" class="btn btn-default  btn-sm" style="margin-right:15px;">编辑</button>
+                        </td>
+                        <td>
+                        <button type="button" class="btn btn-default  btn-sm" style="margin-right:15px;">删除</button>
+                        </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <hr/>
+    </div>
+    <fotter>
+        <p> 作者：亚克西　　　邮箱：yake.mu@reren-inc.com</p>
+    </fotter>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="myModalLabel">新增</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="addDate" class="col-sm-2 control-label">日期</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="addDate" placeholder="请输入日期">
+                                <p id="dt_alert" class="help-block displayInline">日期不能为空</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="destination" class="col-sm-2 control-label">目的地</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="destination" placeholder="请输入目的地">
+                            <p id="destination_alert" class="help-block displayInline">目的地不能为空</p>
+                            </div>
+                        </div>   
+                       
+                        <div class="form-group">
+                            <label for="Consignee" class="col-sm-2 control-label">收货人姓名</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="Consignee" placeholder="请输入收货人姓名">
+                             <p id="Consignee_alert" class="help-block displayInline">收货人姓名不能为空</p>
+                            </div>
+                        </div>   
+                        <div class="form-group">
+                            <label for="telephone" class="col-sm-2 control-label">电话</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="telephone" placeholder="请输入电话">
+                             <p id="telephone_alert" class="help-block displayInline">电话格式不对</p>
+                            </div>
+                        </div>   
+                        <div class="form-group">
+                            <label for="interchange" class="col-sm-2 control-label">中转站</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="interchange" placeholder="请输入中转站">
+                            <p id="interchange_alert" class="help-block displayInline">中转站不能为空</p>
+                            </div>
+                        </div>   
+                        <div class="form-group">
+                            <label for="interchangeTel" class="col-sm-2 control-label">中转站电话</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="interchangeTel" placeholder="请输入中转站电话">
+                             <p id="interchangeTel_alert" class="help-block displayInline">电话格式不对</p>
+                            </div>
+                        </div>    
+                         <div class="form-group">
+                            <label for="freight" class="col-sm-2 control-label">运费</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="freight" placeholder="请输入运费">
+                            <p id="freight_alert" class="help-block displayInline">运费必须是数字</p>
+                            </div>
+                        </div>                       
+                    </form>                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+                    <button type="button" id="btnadd" class="btn btn-primary" ><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    var userid=1;
+    
+    </script>
+    <script type="text/javascript" src="../javascripts/main.js"></script>
+</body>
+
+</html>
