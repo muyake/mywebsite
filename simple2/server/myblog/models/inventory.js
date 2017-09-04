@@ -1,27 +1,28 @@
 var db = require('./db')
 
 function Inventory(inventory) { // 这是一个User类，传递的参数是一个对象，这个对象可以具有两个属性，分别是name和password  
- 
+
     this.id = inventory.id;
-    this.userid=inventory.userid;
-    this.addDate=inventory.addDate;
-     this.Consignee=inventory.Consignee;
-      this.destination=inventory.destination;
-       this.telephone=inventory.telephone;
-        this.interchange=inventory.interchange;
-        this.interchangeTel=inventory.interchangeTel;
-        this.freight=inventory.freight;
+    this.userid = inventory.userid;
+    this.addDate = inventory.addDate;
+    this.Consignee = inventory.Consignee;
+    this.destination = inventory.destination;
+    this.telephone = inventory.telephone;
+    this.interchange = inventory.interchange;
+    this.interchangeTel = inventory.interchangeTel;
+    this.freight = inventory.freight;
 }
 
 // 这个是插入方法  
 Inventory.prototype.save = function(callback) {
-        var self = this;   
-        console.log('Inventory save')
+        var self = this;
+        console.log('Inventory save');
+        console.log('4444');
         db.con(function(connect) {
 
             // 数据库的表名为user，字段名为name和password  
-            connect.query("INSERT INTO inventory(userid,addDate,Consignee,destination,telephone,interchange,interchangeTel,freight) VALUES (?,?,?,?,?,?,?,?)",                 [self.userid, self.addDate,self.Consignee,self.destination,self.telephone,self.interchange,self.interchangeTel,self.freight], function(err, result) {
-              
+            connect.query("INSERT INTO inventory(userid,addDate,Consignee,destination,telephone,interchange,interchangeTel,freight) VALUES (?,?,?,?,?,?,?,?)", [self.userid, self.addDate, self.Consignee, self.destination, self.telephone, self.interchange, self.interchangeTel, self.freight], function(err, result) {
+
 
                 if (err) { //如果出错，那么错误信息作为回调函数的参数返回  
                     console.log("INSERT name:" + self.name + ", password:" + self.password + " error, the err information is " + err);
@@ -67,7 +68,7 @@ Inventory.prototype.delete = function(callback) {
         return callback("You can't delete user information without id!");
     }
     db.con(function(connect) {
-        connect.query('DELETE  FROM user WHERE id = ?', [self.id], function(err, result) {
+        connect.query('DELETE  FROM inventory WHERE id = ?', [self.id], function(err, result) {
             if (err) { //报错  
                 console.log("'DELETE  FROM user WHERE id =" + self.id + " error, the err information is " + err);
                 return callback(err);
@@ -76,4 +77,27 @@ Inventory.prototype.delete = function(callback) {
         })
     })
 };
+// 这个是删除方法  
+Inventory.prototype.getList = function(callback) {
+    var self = this;
+    if (!this.id) { //如果在没账号/密码的情况下就调用插入方法，则提示错误并返回  
+        console.log("You can't delete user information without id!");
+        return callback("You can't delete user information without id!");
+    }
+    db.con(function(connect) {
+        connect.query('SELECT * FROM inventory WHERE userid = ?', [1], function(err, result) {
+            if (err) { //报错  
+                console.log("'SELECT  FROM user WHERE id =" + self.id + " error, the err information is " + err);
+                return callback(err);
+            }
+
+            if (result.length) { //查询到的话，数组是有元素的（即length > 0）  
+                return callback(null, result) //这里的selectResult就是user对象，包含name和password属性  
+            } else {
+                return callback(null, null); //如果查询不到，两个参数都为空  
+            }
+        })
+    })
+};
+
 module.exports = Inventory;
