@@ -22,3 +22,6 @@
 .form-horizontal .control-label{
     line-height: 34px;
 }
+.modal{
+    display: none;
+}
