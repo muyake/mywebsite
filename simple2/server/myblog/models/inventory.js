@@ -17,7 +17,7 @@ function Inventory(inventory) { // 这是一个inventory类，传递的参数是
 Inventory.prototype.save = function(callback) {
         var self = this;
         console.log('Inventory save');
-       
+
         db.con(function(connect) {
 
             // 数据库的表名为inventory，字段名为name和password  
@@ -35,36 +35,38 @@ Inventory.prototype.save = function(callback) {
     // 这个是查询方法  
 Inventory.prototype.get = function(callback) {
     var self = this;
-    if (this.name.length == 0) { //如果在没账号/密码的情况下就调用插入方法，则提示错误并返回  
-        console.log("You can't select inventory information without NAME!");
-        return callback("You can't select inventory information without NAME!");
+    if (this.addDate.length == 0) { //如果在没账号/密码的情况下就调用插入方法，则提示错误并返回  
+        console.log("You can't select inventory information without addDate!");
+        return callback("You can't select inventory information without addDate!");
     }
     var selectResult;
     db.con(function(connect) {
-        connect.query('SELECT * FROM inventory WHERE name = ?', [self.name], function(err, result) {
+        connect.query('SELECT * FROM inventory WHERE addDate = ? and userid = ?', [self.addDate, self.userid], function(err, result) {
             if (err) { //报错  
-                console.log("select name:" + self.name + " error, the err information is " + err);
+                console.log("select addDate:" + self.addDate + " error, the err information is " + err);
                 return callback(err);
             }
             //注意，这里返回的是带账号和密码的，另外，理论上是有可能有多个元素的，但由于在注册时，用户名限制了重复，因此只会返回一个  
             selectResult = result; //这里的result是一个数组，只包含一个元素（或者是空）  
             if (selectResult.length) { //查询到的话，数组是有元素的（即length > 0）  
-                return callback(null, selectResult[0]) //这里的selectResult就是inventory对象，包含name和password属性  
+                return callback(null, selectResult) //这里的selectResult就是inventory对象，包含name和password属性  
             } else {
                 return callback(null, null); //如果查询不到，两个参数都为空  
             }
         })
     })
 };
+
+
 // 这个是编辑方法  
 Inventory.prototype.edit = function(callback) {
-var self = this;
+    var self = this;
     if (!this.id) { //如果在没账号/密码的情况下就调用插入方法，则提示错误并返回  
         console.log("You can't delete inventory information without id!");
         return callback("You can't delete inventory information without id!");
     }
     db.con(function(connect) {
-        connect.query('UPDATE inventory SET userid= ?,addDate= ?,Consignee= ?,destination= ?,telephone= ?,interchange= ?,interchangeTel= ?,freight= ? WHERE id = ?', [self.userid,self.addDate,self.Consignee,self.destination,self.telephone,self.interchange,self.interchangeTel,self.freight,self.id], function(err, result) {
+        connect.query('UPDATE inventory SET userid= ?,addDate= ?,Consignee= ?,destination= ?,telephone= ?,interchange= ?,interchangeTel= ?,freight= ? WHERE id = ?', [self.userid, self.addDate, self.Consignee, self.destination, self.telephone, self.interchange, self.interchangeTel, self.freight, self.id], function(err, result) {
             if (err) { //报错  
                 console.log("'SELECT  FROM inventory WHERE id =" + self.id + " error, the err information is " + err);
                 return callback(err);

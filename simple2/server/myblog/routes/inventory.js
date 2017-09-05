@@ -1,17 +1,48 @@
 var express = require('express'); //调用express
 var router = express.Router(); //生成express的Router方法的一个实例
 var Inventory = require('../models/inventory');
+var ManageInventory = require('../models/manageInventory');
 var User = require('../models/user'); // 调用刚才封装好的user类  
 var url = require('url');
 //处理函数
 router.get('/getInventoryList', function(req, res, next) {
     console.log(22);
     var arg = url.parse(req.url, true).query;
-      console.log(arg.userid);
-    var inventoryList = new Inventory({
+    console.log(arg.userid);
+    var manageInventory = new ManageInventory({
+        userid: arg.userid,
+        size: arg.size,
+        pageNow: arg.pageNow
+    });
+    manageInventory.getList(function(err, result) {
+        if (err) {
+            res.send({
+                code: 500,
+                data: "错误描述" + err
+            })
+        } else if (result === null) { //空数据
+            res.send({
+                code: 501,
+                data: "服务器已经没有更多数据了"
+            })
+        } else {
+            res.send({
+                code: 200,
+                data: result,
+                offset: result.offset
+            });
+        }
+    });
+});
+//处理函数
+router.get('/get', function(req, res, next) {
+    var arg = url.parse(req.url, true).query;
+
+    var inventory = new Inventory({
+        addDate: arg.addDate,
         userid: arg.userid,
     });
-    inventoryList.getList(function(err, result) {
+    inventory.get(function(err, result) {
         if (err) {
             res.send({
                 code: 500,
@@ -85,7 +116,7 @@ router.post('/inventorySave', function(req, res, next) { //当路由捕捉到url
 router.post('/inventoryEdit', function(req, res, next) { //当路由捕捉到url为/reg的post请求时，会执行以下函数  
     console.log('111');
     var inventory = new Inventory({ //生成一个User的实例，并赋给他name和passowrd属性  
-        id:req.body.id,
+        id: req.body.id,
         userid: req.body.userid,
         addDate: req.body.addDate,
         Consignee: req.body.Consignee,
