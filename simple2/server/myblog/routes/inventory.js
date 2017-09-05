@@ -29,20 +29,21 @@ router.get('/getInventoryList', function(req, res, next) {
             res.send({
                 code: 200,
                 data: result,
-                offset: result.offset
+                
             });
         }
     });
 });
 //处理函数
 router.get('/get', function(req, res, next) {
-    var arg = url.parse(req.url, true).query;
-
-    var inventory = new Inventory({
-        addDate: arg.addDate,
+    var arg = url.parse(req.url, true).query;   
+    var manageInventory = new ManageInventory({
         userid: arg.userid,
+        size: arg.size,
+        pageNow: arg.pageNow,
+        searchdate: arg.addDate,
     });
-    inventory.get(function(err, result) {
+    manageInventory.getSearchData(function(err, result) {
         if (err) {
             res.send({
                 code: 500,
@@ -56,8 +57,7 @@ router.get('/get', function(req, res, next) {
         } else {
             res.send({
                 code: 200,
-                data: result,
-                offset: result.offset
+                data: result,              
             });
         }
     });

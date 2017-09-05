@@ -52,6 +52,8 @@ mainObj = {
     getUserInfo: function() {
 
     },
+    status:0,//0代表全部，1代表检索结果
+    searchData:{date:""},
     renderTable: function(data) {
         $('.userTable tbody').empty();
         var trList = '';
@@ -74,20 +76,26 @@ mainObj = {
         });
         $('.userTable tbody').append(trList);
     },
-    search: function(time) {
+    search: function(nowpage,getPager) {
         var self = this;
         $.ajax({
             url: '/inventory/get',
             type: 'get',
             data: {
                 userid: userid,
-                addDate: time
+                addDate: self.searchData.date,
+                size: 2,
+                pageNow: nowpage,
             },
             success: function(response) {
                 console.log(response);
                 if (response.code == 200) {
-                    self.renderTable(response.data);
+                    self.renderTable(response.data.objarr);
+                    if (!getPager) {
+                        self.renderPager(response.data.totalpage, nowpage);
+                    }
                 }
+
             }
         });
     },
@@ -114,8 +122,13 @@ mainObj = {
     },
     renderPager: function(totalpage, nowpage) {
         var self = this;
-        $('.pager').createPage(function(n) {
+        $('.pager').createPage(function(n) {  
+        if(self.status==0){
             self.showAll(n, true);
+        } else{
+             self.search(n, true);
+        }         
+            
         }, {
             pageCount: totalpage || 1
         });
@@ -130,7 +143,12 @@ mainObj = {
             },
             success: function(response) {
                 if (response.code == 200) {
-                    self.showAll(1);
+                    if(self.status==0){
+                          self.showAll(1);
+                      }else{
+                        self.search(1);
+                      }
+                  
                     components.toastFun('删除成功');
                 }
             }
@@ -226,19 +244,26 @@ mainObj = {
                 if (data.code == 200) {
                     $(containStr).modal('hide');
                     components.toastFun('修改成功');
-                    self.showAll(1);
+                   if(self.status==0){
+                          self.showAll(1);
+                      }else{
+                        self.search(1);
+                      }
                 }
             })
         }
-
     },
     bindEvent: function() {
         var self = this;
         $('.searchBtn').on('click', function() {
             var time = $('#searchTime').val();
-            self.search(time);
+            self.status=1;
+            self.searchData.date=time;
+            self.search(1);
         });
         $('.showAllBtn').on('click', function() {
+            self.status=0;
+            $('#searchTime').val('');
             self.showAll(1);
         });
         $('.addBtn').on('click', function() {
@@ -284,77 +309,7 @@ mainObj = {
             self.resetAddFrom();
         });
         $('#btnadd').on('click', function() {
-            self.submitData(0);
-            // var flag = true;
-
-            // var addDate = $('#addModal .addDate').val();
-            // if (addDate) {
-            //     $('#addModal .dt_alert').css("visibility", "hidden");
-            // } else {
-            //     $('#addModal .dt_alert').css("visibility", "visible");
-            //     flag = false;
-            // }
-            // var destination = $('#addModal .destination').val();
-
-            // var Consignee = $('#addModal .Consignee').val();
-
-            // var telephone = $('#addModal .telephone').val();
-            // if (pub.checkTel(telephone)) {
-            //     $('#addModal .telephone_alert').css("visibility", "hidden");
-            // } else {
-            //     $('#addModal .telephone_alert').css("visibility", "visible");
-            //     flag = false;
-            // }
-            // var interchange = $('#addModal .interchange').val();
-
-            // var interchangeTel = $('#addModal .interchangeTel').val();
-
-            // if (pub.checkTel(interchangeTel)) {
-            //     $('#addModal .interchangeTel_alert').css("visibility", "hidden");
-            // } else {
-            //     $('#addModal .interchangeTel_alert').css("visibility", "visible");
-            //     flag = false;
-            // }
-            // var freight = $('#addModal .freight').val();
-            // if (isNaN(freight)) {
-            //     $('#addModal .freight_alert').css("visibility", "visible");
-            //     flag = false;
-            // } else {
-            //     $('#addModal .freight_alert').css("visibility", "hidden");
-            // }
-            // // if (flag) {
-            // //     var inventory = {
-            // //         userid: 1,
-            // //         addDate: addDate,
-            // //         Consignee: Consignee,
-            // //         destination: destination,
-            // //         telephone: telephone,
-            // //         interchange: interchange,
-            // //         interchangeTel: interchangeTel,
-            // //         freight: freight
-            // //     }
-            // //     $.post("/inventory/inventorySave", inventory, function(data) {
-            // //         console.log(data);
-            // //     })
-            // // }
-
-            // var inventory = {
-            //     userid: 1,
-            //     addDate: addDate,
-            //     Consignee: Consignee,
-            //     destination: destination,
-            //     telephone: telephone,
-            //     interchange: interchange,
-            //     interchangeTel: interchangeTel,
-            //     freight: freight
-            // }
-            // $.post("/inventory/inventorySave", inventory, function(data) {
-            //     if (data.code == 200) {
-            //         $('#addModal').modal('hide');
-            //         components.toastFun('添加成功');
-            //         self.showAll(1);
-            //     }
-            // })
+            self.submitData(0);            
         });
         $('#btnedit').on('click', function() {
             self.submitData(1);
@@ -363,7 +318,7 @@ mainObj = {
     },
     init: function() {
         laydate.render({
-            elem: 'searchTime'
+            elem: '#searchTime'
         });
         laydate.render({
             elem: '#addDate'
