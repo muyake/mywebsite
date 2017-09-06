@@ -21,6 +21,7 @@ router.get('/getUserList', function(req, res, next) {
 				data: "服务器已经没有更多数据了"
 			})
 		} else {
+
 			res.send({
 				code: 200,
 				data: result,

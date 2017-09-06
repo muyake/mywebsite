@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./app.js",
-    "debug":"node --debug ./app.js"
-
+    "debug": "node --debug ./app.js",
+    "watch": "nodemon ./app.js"
   },
   "dependencies": {
     "body-parser": "~1.17.1",

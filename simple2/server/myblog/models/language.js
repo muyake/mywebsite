@@ -13,8 +13,8 @@ internation.prototype.languagePacks = {
             emptyInput: "清空"
         },
         layout: {
-            title: "MyBlog By qq20004604",
-            topTitle: "MyBlog",
+            title: "物流管理系统",
+            topTitle: "物流管理系统",
             indexButton: "首页",
             logout: "登出",
             login: "登入",
@@ -86,12 +86,10 @@ internation.prototype.set = function(app) {
 
         //下面两个因为要调用req和res，所以特殊设置
         res.locals.user = function() {
-            if ('session' in req && 'user' in req.session){
-                  res.locals.username=req.session.username;
+            if ('session' in req && 'user' in req.session) {
+                res.locals.username = req.session.username;
                 return req.session.user;
-            }
-              
-            else
+            } else
                 return null;
         };
 

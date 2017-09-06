@@ -28,7 +28,9 @@ User.prototype.save = function(callback) {
                     console.log("INSERT name:" + self.name + ", password:" + self.password + " error, the err information is " + err);
                     return callback(err);
                 }
-                callback(null, result); //如果正常执行，那么第一个参数为null（无错误），第二个参数为返回的结果  
+                console.log(888);
+                console.log(result);
+                callback(null, result); //如果正常执行，那么第一个参数为null（无错误），第二个参数为返回的结果
             })
         })
     }

@@ -1,0 +1,191 @@
+extends systemlayout
+block topContent
+    link(rel='stylesheet', href='../stylesheets/main.css')
+    script(type="text/javascript",src='javascripts/lib/jquery.page.js')
+    script(type="text/javascript",src='javascripts/lib/laydate.js')
+block content         
+    .btnList
+        form.form-inline(role='form')
+            .form-group
+                label.sr-only(for='searchTime') 时间：
+                input#searchTime(type='text')
+                button.btn.btn-primary.searchBtn(type='button') 查询
+                button.btn.btn-primary.showAllBtn(type='button') 显示全部
+                button.btn.btn-primary.addBtn(type='button') 增加
+        .tableContainer
+            table.table.table-hover.userTable
+                thead
+                    tr
+                        th 日期
+                        th 到站
+                        th 收货人姓名
+                        th 电话
+                        th 中转站
+                        th 中转站电话
+                        th 运费
+                        th(colspan='2') &#x7F16;&#x8F91;
+                tbody
+            .pager
+    script(type='text/javascript').
+        var isLogin = #{isLogin};
+        var userid = #{userinfo.id};
+        console.log(userid);
+block bottomContent
+    #addModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='addModalLabel', aria-hidden='true', data-show='true', data-backdrop='static')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') &times;
+                    h4#addModalLabel.modal-title 新增
+                .modal-body
+                    form.form-horizontal(role='form')
+                        .form-group
+                            label.col-sm-2.control-label(for='addDate') 日期
+                            
+                            .col-sm-10
+                                input#addDate.form-control.addDate(type='text', placeholder='请输入日期')
+                                
+                                p.dt_alert.help-block.displayInline 日期不能为空
+                        
+                        .form-group
+                            label.col-sm-2.control-label(for='destination') 目的地
+                            
+                            .col-sm-10
+                                input.form-control.destination(type='text', placeholder='请输入目的地')
+                                
+                                p.destination_alert.help-block.displayInline 目的地不能为空
+                        
+                        
+                        
+                        .form-group
+                            label.col-sm-2.control-label(for='Consignee') 收货人姓名
+                            
+                            .col-sm-10
+                                input.form-control.Consignee(type='text', placeholder='请输入收货人姓名')
+                                
+                                p.Consignee_alert.help-block.displayInline 收货人姓名不能为空
+                        
+                        
+                        .form-group
+                            label.col-sm-2.control-label(for='telephone') 电话
+                            
+                            .col-sm-10
+                                input.form-control.telephone(type='text', placeholder='请输入电话')
+                                
+                                p.telephone_alert.help-block.displayInline 电话格式不对
+                        
+                        
+                        .form-group
+                            label.col-sm-2.control-label(for='interchange') 中转站
+                            
+                            .col-sm-10
+                                input.form-control.interchange(type='text', placeholder='请输入中转站')
+                                
+                                p.interchange_alert.help-block.displayInline 中转站不能为空
+                        
+                        
+                        .form-group
+                            label.col-sm-2.control-label(for='interchangeTel') 中转站电话
+                            
+                            .col-sm-10
+                                input.form-control.interchangeTel(type='text', placeholder='请输入中转站电话')
+                                
+                                p.interchangeTel_alert.help-block.displayInline 电话格式不对
+                        
+                        
+                        .form-group
+                            label.col-sm-2.control-label(for='freight') 运费
+                            
+                            .col-sm-10
+                                input.form-control.freight(type='text', placeholder='请输入运费')
+                                
+                                p.freight_alert.help-block.displayInline 运费必须是数字
+                .modal-footer
+                    button.btn.btn-default(type='button', data-dismiss='modal')
+                        span.glyphicon.glyphicon-remove(aria-hidden='true')
+                         关闭
+                    button#btnadd.btn.btn-primary(type='button')
+                        span.glyphicon.glyphicon-floppy-disk(aria-hidden='true')
+                         保存
+    #editModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='addModalLabel', aria-hidden='true', data-show='true', data-backdrop='static')
+            .modal-dialog(role='document')
+                .modal-content
+                    .modal-header
+                        button.close(type='button', data-dismiss='modal', aria-label='Close')
+                            span(aria-hidden='true') &times;
+                        
+                        h4#editModalLabel.modal-title &#x4FEE;&#x6539;
+                    .modal-body
+                        form.form-horizontal(role='form')
+                            .form-group
+                                label.col-sm-2.control-label(for='addDate') 日期
+                                
+                                .col-sm-10
+                                    input#editDate.form-control.addDate(type='text', placeholder='请输入日期')
+                                    
+                                    p.dt_alert.help-block.displayInline 日期不能为空
+                            
+                            .form-group
+                                label.col-sm-2.control-label(for='destination') 目的地
+                                
+                                .col-sm-10
+                                    input.form-control.destination(type='text', placeholder='请输入目的地')
+                                    
+                                    p.destination_alert.help-block.displayInline 目的地不能为空
+                            
+                            
+                            
+                            .form-group
+                                label.col-sm-2.control-label(for='Consignee') 收货人姓名
+                                
+                                .col-sm-10
+                                    input.form-control.Consignee(type='text', placeholder='请输入收货人姓名')
+                                    
+                                    p.Consignee_alert.help-block.displayInline 收货人姓名不能为空
+                            
+                            
+                            .form-group
+                                label.col-sm-2.control-label(for='telephone') 电话
+                                
+                                .col-sm-10
+                                    input.form-control.telephone(type='text', placeholder='请输入电话')
+                                    
+                                    p.telephone_alert.help-block.displayInline 电话格式不对
+                            
+                            
+                            .form-group
+                                label.col-sm-2.control-label(for='interchange') 中转站
+                                
+                                .col-sm-10
+                                    input.form-control.interchange(type='text', placeholder='请输入中转站')
+                                    
+                                    p.interchange_alert.help-block.displayInline 中转站不能为空
+                            
+                            
+                            .form-group
+                                label.col-sm-2.control-label(for='interchangeTel') 中转站电话
+                                
+                                .col-sm-10
+                                    input.form-control.interchangeTel(type='text', placeholder='请输入中转站电话')
+                                    
+                                    p.interchangeTel_alert.help-block.displayInline 电话格式不对
+                            
+                            
+                            .form-group
+                                label.col-sm-2.control-label(for='freight') 运费
+                                
+                                .col-sm-10
+                                    input.form-control.freight(type='text', placeholder='请输入运费')
+                                    
+                                    p.freight_alert.help-block.displayInline 运费必须是数字
+                    .modal-footer
+                        button.btn.btn-default(type='button', data-dismiss='modal')
+                            span.glyphicon.glyphicon-remove(aria-hidden='true')
+                             关闭
+                        
+                        button#btnedit.btnedit.btn.btn-primary(type='button')
+                            span.glyphicon.glyphicon-floppy-disk(aria-hidden='true')
+                             保存
+
+    script(type="text/javascript",src='javascripts/main.js')

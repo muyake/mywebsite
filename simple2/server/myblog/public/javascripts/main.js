@@ -52,8 +52,10 @@ mainObj = {
     getUserInfo: function() {
 
     },
-    status:0,//0代表全部，1代表检索结果
-    searchData:{date:""},
+    status: 0, //0代表全部，1代表检索结果
+    searchData: {
+        date: ""
+    },
     renderTable: function(data) {
         $('.userTable tbody').empty();
         var trList = '';
@@ -76,7 +78,7 @@ mainObj = {
         });
         $('.userTable tbody').append(trList);
     },
-    search: function(nowpage,getPager) {
+    search: function(nowpage, getPager) {
         var self = this;
         $.ajax({
             url: '/inventory/get',
@@ -122,13 +124,13 @@ mainObj = {
     },
     renderPager: function(totalpage, nowpage) {
         var self = this;
-        $('.pager').createPage(function(n) {  
-        if(self.status==0){
-            self.showAll(n, true);
-        } else{
-             self.search(n, true);
-        }         
-            
+        $('.pager').createPage(function(n) {
+            if (self.status == 0) {
+                self.showAll(n, true);
+            } else {
+                self.search(n, true);
+            }
+
         }, {
             pageCount: totalpage || 1
         });
@@ -143,25 +145,32 @@ mainObj = {
             },
             success: function(response) {
                 if (response.code == 200) {
-                    if(self.status==0){
-                          self.showAll(1);
-                      }else{
+                    if (self.status == 0) {
+                        self.showAll(1);
+                    } else {
                         self.search(1);
-                      }
-                  
+                    }
+
                     components.toastFun('删除成功');
                 }
             }
         })
     },
-    resetAddFrom: function() {
-        $('#addDate').val('');
-        $('#destination').val('');
-        $('#Consignee').val('');
-        $('#telephone').val('');
-        $('#interchange').val('');
-        $('#interchangeTel').val('');
-        $('#freight').val('')
+    resetAddFrom: function(status) {
+        var containStr = status == 0 ? "#addModal" : "#editModal";
+        $(containStr + ' .addDate').val('');
+        $(containStr + ' .destination').val('');
+        $(containStr + ' .Consignee').val('');
+        $(containStr + ' .telephone').val('');
+        $(containStr + ' .interchange').val('');
+        $(containStr + ' .interchangeTel').val('');
+        $(containStr + ' .freight').val('');
+        $(containStr + ' .telephone_alert').css({
+            'visibility': 'hidden'
+        });
+        $(containStr + ' .interchangeTel_alert').css({
+            'visibility': 'hidden'
+        });
     },
 
     submitData: function(status) {
@@ -221,7 +230,7 @@ mainObj = {
         // }
 
         var inventory = {
-            userid: 1,
+            userid: userid,
             addDate: addDate,
             Consignee: Consignee,
             destination: destination,
@@ -244,11 +253,11 @@ mainObj = {
                 if (data.code == 200) {
                     $(containStr).modal('hide');
                     components.toastFun('修改成功');
-                   if(self.status==0){
-                          self.showAll(1);
-                      }else{
+                    if (self.status == 0) {
+                        self.showAll(1);
+                    } else {
                         self.search(1);
-                      }
+                    }
                 }
             })
         }
@@ -257,12 +266,12 @@ mainObj = {
         var self = this;
         $('.searchBtn').on('click', function() {
             var time = $('#searchTime').val();
-            self.status=1;
-            self.searchData.date=time;
+            self.status = 1;
+            self.searchData.date = time;
             self.search(1);
         });
         $('.showAllBtn').on('click', function() {
-            self.status=0;
+            self.status = 0;
             $('#searchTime').val('');
             self.showAll(1);
         });
@@ -306,10 +315,15 @@ mainObj = {
         });
         //模态框显示时，执行的代码。
         $('#addModal').on('show.bs.modal', function() {
-            self.resetAddFrom();
+
+            self.resetAddFrom(0);
+        });
+        $('#editModal').on('hide.bs.modal', function() {
+
+            self.resetAddFrom(1);
         });
         $('#btnadd').on('click', function() {
-            self.submitData(0);            
+            self.submitData(0);
         });
         $('#btnedit').on('click', function() {
             self.submitData(1);

@@ -17,4 +17,24 @@ UserManager.prototype.getList = function(callback) {
 		})
 	})
 }
+UserManager.prototype.setLoginInfo = function(app) {
+	var self = this;
+	console.log(4444);
+	app.use(function(req, res, next) {
+			if ('session' in req && 'userinfo' in req.session && !! req.session['userinfo']) {
+                res.locals.userinfo = req.session.userinfo;
+                res.locals.isLogin = true;
+                req.session.isLogin=true;
+
+                //return true;
+			} else {
+                res.locals.isLogin = false;
+                res.locals.userinfo =null;
+                req.session.isLogin=false;
+				//return false;
+			}
+		next();
+	});
+
+}
 module.exports = UserManager;

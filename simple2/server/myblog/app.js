@@ -25,11 +25,12 @@ app.use(session({
 		maxAge: 3600 * 1000
 	}
 }));
-var language = require('./models/language'); //多语言
-var internation = new language();
-internation.set(app);
 
-//var loginInfo== require('./models/language'); //查看登录信息。
+var UserManagerObj = require('./models/userManager'); //多语言
+var userManagerObj = new UserManagerObj();
+
+userManagerObj.setLoginInfo(app);
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -46,34 +47,36 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //路由的处理
-app.use('/login', checkNotLogin);
-app.use('/reg', checkNotLogin);
-app.use('/reg', checkNotLogin);
+app.use('/index', checkLogin);
+app.use('/login', checkNotLogin); //已经等录了，就跳转到主页面
+app.use('/reg', checkNotLogin); //已经等录了，就跳转到主页面
+
 //必须在已登录情况下才能访问
 
 //未登录检测（已登录情况下执行）
 function checkNotLogin(req, res, next) {
-	if (req.session.user) {
+	if (req.session.isLogin) {
 		req.session.err = "已登录，请不要重复登录";
-		return res.redirect('/');
+		return res.redirect('/index');
 	}
 	next();
 }
 //已登录检测（未登录情况下执行）
 function checkLogin(req, res, next) {
-	if (!req.session.user) {
+	console.log('我是'+req.session.isLogin);
+	if (!req.session.isLogin) {
 		req.session.err = "你还没有登录，请登录";
+		console.log(111);
 		return res.redirect('/login');
 	}
 	next();
 }
 
-
 app.use('/inventory', inventory);
 app.use('/logout', logout); //登出 
 app.use('/userManager', userManager); //用户管理
 app.use('/language', lan); //切换语言的
-app.use('/', index);
+app.use('/index', index);
 app.use('/users', users);
 app.use('/reg', reg); //注册的，reg.js来处理  
 app.use('/login', login); //登录的，login来处理
