@@ -71,7 +71,10 @@ function checkLogin(req, res, next) {
 	}
 	next();
 }
-
+//跳转到首页
+function redirectIndex(req, res, next) {
+        return res.redirect('/index');
+}
 app.use('/inventory', inventory);
 app.use('/logout', logout); //登出 
 app.use('/userManager', userManager); //用户管理
@@ -81,7 +84,8 @@ app.use('/users', users);
 app.use('/reg', reg); //注册的，reg.js来处理  
 app.use('/login', login); //登录的，login来处理
 app.use('/post', postBlog); //提交博客
-app.use('/loadblog', users); //用户主页，users来处理  
+app.use('/loadblog', users); //用户主页，users来处理
+app.use('/', redirectIndex);
 
 
 // catch 404 and forward to error handler

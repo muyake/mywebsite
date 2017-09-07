@@ -18,7 +18,7 @@ router.post('/', function(req, res, next) {
     newUser.get(function(err, user) {
         if (!user) { //用户名不存在
             return res.send({
-                errorName: res.locals.message.errorName
+                errorName: '密码或用户名不正确！'
             });
         } else if (user) { //如果第二个参数存在，说明用户名重复了，那么监测密码是否相同
             if (user.password === password) { //密码正确，登录成功
@@ -27,18 +27,18 @@ router.post('/', function(req, res, next) {
                 req.session.userinfo = user;
                 req.session.success = "登录成功！";
                 res.locals.userinfo = user;
-                res.locals.isLogin=true;
+                res.locals.isLogin = true;
                 // res.redirect('/');
                 console.log(666);
                 console.log(2221);
-                console.log( req.session.isLogin);
+                console.log(req.session.isLogin);
                 console.log(333);
                 return res.send({
                     success: '/index'
                 });
             } else {
                 return res.send({
-                    errorPW: res.locals.message.errorPW
+                    errorPW: "密码错误！"
                 });
             }
         } else if (err) { //如果报错，返回报错信息
