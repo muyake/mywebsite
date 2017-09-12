@@ -11,9 +11,9 @@ var reg = require('./routes/reg');
 var login = require('./routes/login');
 var lan = require('./routes/language');
 var logout = require('./routes/logout');
-var postBlog = require('./routes/post');
+var captcha = require('./routes/captcha');
 var userManager = require('./routes/userManager');
-
+var postBlog = require('./routes/post');
 var inventory = require('./routes/inventory');
 //var getUserList = require('./routes/getUserList');
 var app = express();
@@ -85,6 +85,7 @@ app.use('/reg', reg); //注册的，reg.js来处理
 app.use('/login', login); //登录的，login来处理
 app.use('/post', postBlog); //提交博客
 app.use('/loadblog', users); //用户主页，users来处理
+app.use('/getCaptcha', captcha);
 app.use('/', redirectIndex);
 
 

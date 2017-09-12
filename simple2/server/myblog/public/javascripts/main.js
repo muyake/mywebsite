@@ -60,6 +60,10 @@ mainObj = {
         $('.userTable tbody').empty();
         var trList = '';
         data.forEach(function(item) {
+            var keys= Object.keys(item);
+           keys.forEach(function(item2){
+          item[item2]=  item[item2]||'';
+           })
             trList += '<tr data-id=' + item.id + ' data-userid=' + item.userid + ' data-interchange=' + item.interchange + '  data-addDate=' + item.addDate + '  data-destination=' + item.destination + '  data-consignee=' + item.Consignee + '  data-telephone=' + item.telephone + '  data-interchangeTel=' + item.interchangeTel + '  data-freight=' + item.freight + ' >\
                         <td>' + item.addDate + '</td>\
                         <td>' + item.destination + '</td>\
@@ -67,7 +71,9 @@ mainObj = {
                         <td>' + item.telephone + '</td>\
                         <td>' + item.interchange + '</td>\
                         <td>' + item.interchangeTel + '</td>\
+                         <td>' + item.product + '</td>\
                         <td>' + item.freight + '</td>\
+                          <td>' + item.transit + '</td>\
                         <td>\
                         <button type="button" class="btn btn-default edit btn-sm" style="margin-right:15px;">编辑</button>\
                         </td>\
@@ -206,12 +212,22 @@ mainObj = {
             $(containStr + ' .interchangeTel_alert').css("visibility", "visible");
             flag = false;
         }
+        var product = $(containStr + ' .product').val();
+
         var freight = $(containStr + ' .freight').val();
         if (isNaN(freight)) {
             $(containStr + ' .freight_alert').css("visibility", "visible");
             flag = false;
         } else {
             $(containStr + ' .freight_alert').css("visibility", "hidden");
+        }
+
+        var transit = $(containStr + ' .transit').val();
+        if (isNaN(transit)) {
+            $(containStr + ' .transit_alert').css("visibility", "visible");
+            flag = false;
+        } else {
+            $(containStr + ' .transit_alert').css("visibility", "hidden");
         }
         // if (flag) {
         //     var inventory = {
@@ -237,7 +253,9 @@ mainObj = {
             telephone: telephone,
             interchange: interchange,
             interchangeTel: interchangeTel,
-            freight: freight
+            product:product,
+            freight: freight,
+            transit:transit,
         }
         if (status == 0) {
             $.post("/inventory/inventorySave", inventory, function(data) {
@@ -342,6 +360,11 @@ mainObj = {
         });
         this.showAll(1);
         this.bindEvent();
+
+        $('#addModal').modal({
+                keyboard: false,
+                backdrop: 'static',
+            });
     }
 }
 $(document).ready(function() {

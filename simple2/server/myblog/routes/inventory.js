@@ -95,7 +95,9 @@ router.post('/inventorySave', function(req, res, next) { //当路由捕捉到url
         telephone: req.body.telephone,
         interchange: req.body.interchange,
         interchangeTel: req.body.interchangeTel,
-        freight: req.body.freight
+         product:req.body.product,
+        freight: req.body.freight,
+transit:req.body.transit,
     });
     inventory.save(function(err, result) {
         console.log('1111');

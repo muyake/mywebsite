@@ -22,7 +22,9 @@ block content
                         th 电话
                         th 中转站
                         th 中转站电话
+                        th 品名
                         th 运费
+                        th 中转费
                         th(colspan='2') &#x7F16;&#x8F91;
                 tbody
             .pager
@@ -38,7 +40,7 @@ block bottomContent
                     button.close(type='button', data-dismiss='modal', aria-label='Close')
                         span(aria-hidden='true') &times;
                     h4#addModalLabel.modal-title 新增
-                .modal-body
+                .modal-body(style='max-height:420px;')
                     form.form-horizontal(role='form')
                         .form-group
                             label.col-sm-2.control-label(for='addDate') 日期
@@ -95,12 +97,30 @@ block bottomContent
                         
                         
                         .form-group
+                            label.col-sm-2.control-label(for='product') 货品名称
+                            
+                            .col-sm-10
+                                input.form-control.product(type='text', placeholder='请输入货品名称')
+                                
+                                p.interchangeTel_alert.help-block.displayInline 货品名称不对
+                        
+                        .form-group
                             label.col-sm-2.control-label(for='freight') 运费
                             
                             .col-sm-10
                                 input.form-control.freight(type='text', placeholder='请输入运费')
                                 
                                 p.freight_alert.help-block.displayInline 运费必须是数字
+
+                        .form-group
+                            label.col-sm-2.control-label(for='transit') 中转费
+                            
+                            .col-sm-10
+                                input.form-control.transit(type='text', placeholder='请输入中转站电话')
+                                
+                                p.transit_alert.help-block.displayInline 中转费必须是数字
+                        
+
                 .modal-footer
                     button.btn.btn-default(type='button', data-dismiss='modal')
                         span.glyphicon.glyphicon-remove(aria-hidden='true')
@@ -116,7 +136,7 @@ block bottomContent
                             span(aria-hidden='true') &times;
                         
                         h4#editModalLabel.modal-title &#x4FEE;&#x6539;
-                    .modal-body
+                    .modal-body(style='max-height:420px;')
                         form.form-horizontal(role='form')
                             .form-group
                                 label.col-sm-2.control-label(for='addDate') 日期
@@ -179,6 +199,7 @@ block bottomContent
                                     input.form-control.freight(type='text', placeholder='请输入运费')
                                     
                                     p.freight_alert.help-block.displayInline 运费必须是数字
+                    
                     .modal-footer
                         button.btn.btn-default(type='button', data-dismiss='modal')
                             span.glyphicon.glyphicon-remove(aria-hidden='true')

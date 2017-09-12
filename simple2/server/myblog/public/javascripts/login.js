@@ -20,7 +20,7 @@ $(document).ready(function () {
             return
         time = new Date();
         //发起ajax请求
-        $.post("login", user, function (data) {
+        $.post(" login", user, function (data) {
             if ("errorName" in data) {
                 $("#name-alert").removeClass("displayNONE")
                 $("#name-alert").text(data.errorName);

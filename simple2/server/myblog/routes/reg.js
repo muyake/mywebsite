@@ -17,6 +17,21 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) { //当路由捕捉到url为/reg的post请求时，会执行以下函数  
+    var captcha=req.body.captcha;
+    console.log('我是验证码'+captcha);
+    if(captcha&&captcha.length>0){
+        if(captcha!==req.session.captcha){
+             return res.send({
+                code:1,
+                error: '验证码不正确'
+            });
+        }
+    }else{
+         return res.send({
+
+                error: '验证码不能为空'
+            });
+    }
     // 获取md5这个对象；（表示调用这个对象的方法，加密的形式是MD5）；  
     var md5 = crypto.createHash('md5');
     // 调用md5的update方法，update的第一个参数是被处理的内容，第二个是可选的，但如果要对中文进行处理，那么就需要加上'utf-8'这个参数；  
@@ -33,18 +48,21 @@ router.post('/', function(req, res, next) { //当路由捕捉到url为/reg的pos
         if (err) { //如果报错，返回报错信息
             console.log(err);
             return res.send({
+                 code:2,
                 error: err
             });
         }
         if (result) { //如果第二个参数存在，说明用户名重复了，返回提示
             return res.send({
-                error: "Username already exists."
+                code:2,
+                error: "用户名已经存在"
             });
         }
         newUser.save(function(err, result) {
             if (err) { //如果存入时报错
                 return res.send({
-                    error: err
+                    code:2,
+                    error: err,
                 });
             }
             newUser.get(function (err1, result1) {

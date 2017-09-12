@@ -1,6 +1,6 @@
 var mysql = require("mysql"); //调用nodejs和mysql交互的模块；  
 var pool = mysql.createPool({ //创建连接池  
-    host: '127.0.0.1', //表示本地的数据库  
+    host: '118.190.156.135', //表示本地的数据库  
     user: 'root', //账号  
     password: 'abcmyk123', //密码  
     port: '3306', //默认端口  

@@ -13,16 +13,23 @@ block content
                     p.help-block.displayNONE#error-alert  
   
             div.control-group  
-                label.control-label(for="password") 口令  
+                label.control-label(for="password") 密码  
                 div.controls  
                     input.input-xlarge#password(type="password",name="password")  
                     p.help-block.displayNONE#pw-error     密码不能为空  
   
             div.control-group  
-                label.control-label(for="password-repeat")  重复输入口令  
+                label.control-label(for="captcha")  重复密码  
                 div.controls  
                     input.input-xlarge#password-repeat(type="password",name="password-repeat")  
                     p.help-block.displayNONE#pw-rp-error     两次密码需要一致  
+            
+            div.control-group  
+                label.control-label(for="captcha")  二维码  
+                div.controls  
+                    input.input-xlarge#captcha(type="text",name="captcha")  
+                    img(src='/getCaptcha' style='background:silver;margin:0 5px;')
+                    p.help-block.displayNONE#cc-error   
   
             div.form-actions  
                 button.btn.btn-priamry#submit-button   注册  

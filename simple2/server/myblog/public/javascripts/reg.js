@@ -5,6 +5,7 @@ $(document).ready(function() {
         var name = $("#username").val();
         var pw = $("#password").val();
         var pwRepeat = $("#password-repeat").val();
+        var captcha = $("#captcha").val();
 
         //未输入账号名  
         if (name.length === 0) {
@@ -41,9 +42,21 @@ $(document).ready(function() {
             return;
         }
 
+        //验证码为空  
+        if (captcha.length === 0) {
+            $("#captcha").parent().parent().addClass("error");
+            $("#cc-error").removeClass("displayNONE");
+            $("#cc-error").html('二维码不能为空');
+            setTimeout(function() {
+                $("#captcha").parent().parent().removeClass("error");
+                $("#cc-error").addClass("displayNONE");
+            }, 2000);
+            return;
+        }
         var obj = {
             name: name,
-            password: pw
+            password: pw,
+            captcha: captcha
         };
 
         //防止连续点击，先禁用提交按钮，防止重复提交  
@@ -55,13 +68,24 @@ $(document).ready(function() {
         //发起请求，回调内容是一个对象，注册成功会有success，注册失败会有error属性  
         $.post("/reg", obj, function(data) {
             if ("error" in data) {
-                $("#error-alert").removeClass("displayNONE")
-                $("#error-alert").text(data.error);
-                $("#error-alert").parent().parent().addClass("error");
-                setTimeout(function() {
-                    $("#error-alert").addClass("displayNONE")
-                    $("#error-alert").parent().parent().removeClass("error");
-                }, 2000)
+                if (data.code == 2) {
+                    $("#error-alert").removeClass("displayNONE")
+                    $("#error-alert").text(data.error);
+                    $("#error-alert").parent().parent().addClass("error");
+                    setTimeout(function() {
+                        $("#error-alert").addClass("displayNONE")
+                        $("#error-alert").parent().parent().removeClass("error");
+                    }, 2000)
+                }else  if(data.code == 1){
+                     $("#cc-alert").removeClass("displayNONE")
+                    $("#cc-alert").text(data.error);
+                    $("#cc-alert").parent().parent().addClass("error");
+                    setTimeout(function() {
+                        $("#cc-alert").addClass("displayNONE")
+                        $("#cc-alert").parent().parent().removeClass("error");
+                    }, 2000)
+                }
+
                 time = 0; //注册失败，清空time计时，允许再次提交  
             } else if ("success" in data) {
                 location.href = data.success; //注册成功则重定向  

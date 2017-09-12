@@ -21,7 +21,7 @@ Inventory.prototype.save = function(callback) {
         db.con(function(connect) {
 
             // 数据库的表名为inventory，字段名为name和password  
-            connect.query("INSERT INTO inventory(userid,addDate,Consignee,destination,telephone,interchange,interchangeTel,freight) VALUES (?,?,?,?,?,?,?,?)", [self.userid, self.addDate, self.Consignee, self.destination, self.telephone, self.interchange, self.interchangeTel, self.freight], function(err, result) {
+            connect.query("INSERT INTO inventory(userid,addDate,Consignee,destination,telephone,interchange,interchangeTel,product,freight,transit) VALUES (?,?,?,?,?,?,?,?,?,?)", [self.userid, self.addDate, self.Consignee, self.destination, self.telephone, self.interchange, self.interchangeTel, self.product,self.freight,self.transit], function(err, result) {
 
 
                 if (err) { //如果出错，那么错误信息作为回调函数的参数返回  
