@@ -97,8 +97,9 @@ router.post('/inventorySave', function(req, res, next) { //当路由捕捉到url
         interchangeTel: req.body.interchangeTel,
          product:req.body.product,
         freight: req.body.freight,
-transit:req.body.transit,
+        transit:req.body.transit,
     });
+    console.log("ss"+req.body.transit);
     inventory.save(function(err, result) {
         console.log('1111');
         if (err) { //如果存入时报错
@@ -124,12 +125,14 @@ router.post('/inventoryEdit', function(req, res, next) { //当路由捕捉到url
         Consignee: req.body.Consignee,
         destination: req.body.destination,
         telephone: req.body.telephone,
-        interchange: req.body.interchange,
+          interchange: req.body.interchange,
         interchangeTel: req.body.interchangeTel,
-        freight: req.body.freight
+         product:req.body.product,
+        freight: req.body.freight,
+        transit:req.body.transit,
     });
     inventory.edit(function(err, result) {
-        console.log('1111');
+        //console.log('1111');
         if (err) { //如果存入时报错
             return res.send({
                 error: err

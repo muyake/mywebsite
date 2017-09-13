@@ -25,11 +25,14 @@ block content
                     p.help-block.displayNONE#pw-rp-error     两次密码需要一致  
             
             div.control-group  
-                label.control-label(for="captcha")  二维码  
+                label.control-label(for="captcha")  验证码  
                 div.controls  
                     input.input-xlarge#captcha(type="text",name="captcha")  
-                    img(src='/getCaptcha' style='background:silver;margin:0 5px;')
+                    img.captcha(src='/getCaptcha' style='background:silver;margin:0 5px;')
                     p.help-block.displayNONE#cc-error   
   
             div.form-actions  
-                button.btn.btn-priamry#submit-button   注册  
+                //- button.btn.btn-priamry#submit-button   注册  
+                button.btn.btn-primary#submit-button(style='margin-right:30px;') 注册
+                a.btn.btn-default(href="/login")    登录  
+             

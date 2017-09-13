@@ -2,7 +2,7 @@ var db = require('./db')
 
 function Inventory(inventory) { // 这是一个inventory类，传递的参数是一个对象，这个对象可以具有两个属性，分别是name和password  
 
-    this.id = inventory.id;
+    this.id =parseInt( inventory.id);
     this.userid = inventory.userid;
     this.addDate = inventory.addDate;
     this.Consignee = inventory.Consignee;
@@ -10,7 +10,9 @@ function Inventory(inventory) { // 这是一个inventory类，传递的参数是
     this.telephone = inventory.telephone;
     this.interchange = inventory.interchange;
     this.interchangeTel = inventory.interchangeTel;
-    this.freight = inventory.freight;
+    this.freight =inventory.freight;
+     this. product=inventory.product;     
+    this.transit=inventory.transit ;
 }
 
 // 这个是插入方法  
@@ -66,7 +68,7 @@ Inventory.prototype.edit = function(callback) {
         return callback("You can't delete inventory information without id!");
     }
     db.con(function(connect) {
-        connect.query('UPDATE inventory SET userid= ?,addDate= ?,Consignee= ?,destination= ?,telephone= ?,interchange= ?,interchangeTel= ?,freight= ? WHERE id = ?', [self.userid, self.addDate, self.Consignee, self.destination, self.telephone, self.interchange, self.interchangeTel, self.freight, self.id], function(err, result) {
+        connect.query('UPDATE inventory SET userid= ?,addDate= ?,Consignee= ?,destination= ?,telephone= ?,interchange= ?,interchangeTel= ?,product= ?,freight= ?,transit= ? WHERE id = ?', [self.userid, self.addDate, self.Consignee, self.destination, self.telephone, self.interchange, self.interchangeTel,self.product, self.freight,self.transit,  self.id], function(err, result) {
             if (err) { //报错  
                 console.log("'SELECT  FROM inventory WHERE id =" + self.id + " error, the err information is " + err);
                 return callback(err);

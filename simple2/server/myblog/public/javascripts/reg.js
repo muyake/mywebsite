@@ -85,7 +85,8 @@ $(document).ready(function() {
                         $("#cc-alert").parent().parent().removeClass("error");
                     }, 2000)
                 }
-
+                var random=100*Math.random();
+                $(".captcha").attr({'src':'/getCaptcha?num='+random});               
                 time = 0; //注册失败，清空time计时，允许再次提交  
             } else if ("success" in data) {
                 location.href = data.success; //注册成功则重定向  

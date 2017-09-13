@@ -64,7 +64,7 @@ mainObj = {
            keys.forEach(function(item2){
           item[item2]=  item[item2]||'';
            })
-            trList += '<tr data-id=' + item.id + ' data-userid=' + item.userid + ' data-interchange=' + item.interchange + '  data-addDate=' + item.addDate + '  data-destination=' + item.destination + '  data-consignee=' + item.Consignee + '  data-telephone=' + item.telephone + '  data-interchangeTel=' + item.interchangeTel + '  data-freight=' + item.freight + ' >\
+            trList += '<tr data-id=' + item.id + ' data-userid=' + item.userid+' data-transit=' + item.transit +' data-product=' + item.product + ' data-interchange=' + item.interchange + '  data-addDate=' + item.addDate + '  data-destination=' + item.destination + '  data-consignee=' + item.Consignee + '  data-telephone=' + item.telephone + '  data-interchangeTel=' + item.interchangeTel + '  data-freight=' + item.freight + ' >\
                         <td>' + item.addDate + '</td>\
                         <td>' + item.destination + '</td>\
                         <td>' + item.Consignee + '</td>\
@@ -92,7 +92,7 @@ mainObj = {
             data: {
                 userid: userid,
                 addDate: self.searchData.date,
-                size: 2,
+                size: 25,
                 pageNow: nowpage,
             },
             success: function(response) {
@@ -115,7 +115,7 @@ mainObj = {
             type: 'get',
             data: {
                 userid: userid,
-                size: 2,
+                size: 25,
                 pageNow: nowpage,
             },
             success: function(data) {
@@ -229,21 +229,9 @@ mainObj = {
         } else {
             $(containStr + ' .transit_alert').css("visibility", "hidden");
         }
-        // if (flag) {
-        //     var inventory = {
-        //         userid: 1,
-        //         addDate: addDate,
-        //         Consignee: Consignee,
-        //         destination: destination,
-        //         telephone: telephone,
-        //         interchange: interchange,
-        //         interchangeTel: interchangeTel,
-        //         freight: freight
-        //     }
-        //     $.post("/inventory/inventorySave", inventory, function(data) {
-        //         console.log(data);
-        //     })
-        // }
+        if (flag) {
+            return;
+        }
 
         var inventory = {
             userid: userid,
@@ -324,6 +312,8 @@ mainObj = {
             $('#editModal .interchange').val(tr.attr('data-interchange'));
             $('#editModal .interchangeTel').val(tr.attr('data-interchangeTel'));
             $('#editModal .freight').val(tr.attr('data-freight'));
+             $('#editModal .product').val(tr.attr('data-product'));
+                $('#editModal .transit').val(tr.attr('data-transit'));
             $('#btnedit').attr('data-id', tr.attr('data-id'));
             $('#editModal').modal({
                 keyboard: false,
@@ -361,10 +351,10 @@ mainObj = {
         this.showAll(1);
         this.bindEvent();
 
-        $('#addModal').modal({
-                keyboard: false,
-                backdrop: 'static',
-            });
+        // $('#editModal').modal({
+        //         keyboard: false,
+        //         backdrop: 'static',
+        //     });
     }
 }
 $(document).ready(function() {
