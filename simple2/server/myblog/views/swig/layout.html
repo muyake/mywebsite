@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>物流管理系统</title>
+    <link rel="stylesheet" href="../stylesheets/bootstrapcss/bootstrap.min.css">
+    <link rel="stylesheet" href="../stylesheets/public.css">
+        <link rel="stylesheet" href="../stylesheets/layout.css">
+    <script type="text/javascript" src="../javascripts/jq.js"></script>
+    <script type="text/javascript" src="../javascripts/bootstrapjs/bootstrap.min.js"></script>
+
+  {% block topContent %}
+ {% endblock %}
+</head>
+  <body  style="">
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container"><a data-toggle="collapse" data-target=".nav-collapse" class="btn btn-navbar"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a href="/" class="brand">物流管理系统</a>
+                <div class="nav-collapse">
+                    <ul class="nav">                        
+                        {% if isLogin %}
+                            <li><a href="javascript:void(0)">{{ userinfo.name }}</a></li>
+                            <li><a href="/logout">退出</a></li>
+                           {% endif %}
+                    </ul>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+     <div id="contrainer" class="container">
+       {% block mainContent %}
+ {% endblock %}
+        <hr>
+    </div>
+    <fotter>
+        <p> 欢迎使用本系统</p>
+    </fotter>
+    {% block bottomContent %}
+ {% endblock %}
+  </body>
+</html>

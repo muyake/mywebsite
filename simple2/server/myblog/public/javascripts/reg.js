@@ -46,7 +46,7 @@ $(document).ready(function() {
         if (captcha.length === 0) {
             $("#captcha").parent().parent().addClass("error");
             $("#cc-error").removeClass("displayNONE");
-            $("#cc-error").html('二维码不能为空');
+            $("#cc-error").html('验证码不能为空');
             setTimeout(function() {
                 $("#captcha").parent().parent().removeClass("error");
                 $("#cc-error").addClass("displayNONE");
@@ -76,17 +76,20 @@ $(document).ready(function() {
                         $("#error-alert").addClass("displayNONE")
                         $("#error-alert").parent().parent().removeClass("error");
                     }, 2000)
-                }else  if(data.code == 1){
-                     $("#cc-alert").removeClass("displayNONE")
-                    $("#cc-alert").text(data.error);
-                    $("#cc-alert").parent().parent().addClass("error");
+                } else if (data.code == 1) {
+                    $("#captcha").parent().parent().addClass("error");
+                    $("#cc-error").removeClass("displayNONE");
+                    $("#cc-error").html('验证码不能为空');
                     setTimeout(function() {
-                        $("#cc-alert").addClass("displayNONE")
-                        $("#cc-alert").parent().parent().removeClass("error");
-                    }, 2000)
+                        $("#captcha").parent().parent().removeClass("error");
+                        $("#cc-error").addClass("displayNONE");
+                    }, 2000);
+
                 }
-                var random=100*Math.random();
-                $(".captcha").attr({'src':'/getCaptcha?num='+random});               
+                var random = 100 * Math.random();
+                $(".captcha").attr({
+                    'src': '/getCaptcha?num=' + random
+                });
                 time = 0; //注册失败，清空time计时，允许再次提交  
             } else if ("success" in data) {
                 location.href = data.success; //注册成功则重定向  

@@ -1,0 +1,45 @@
+{% extends './layout.html' %} {% block topContent %}
+<link rel="stylesheet" href="../stylesheets/static.css">
+<script type="text/javascript" src="javascripts/lib/laydate.js"></script>
+{% endblock %} {% block mainContent %}
+<div class="btnList">
+    <form role="form" class="form-inline">
+        <div class="form-group">
+            <label for="searchTime" class="sr-only">时间：</label>
+            <input id="searchTime" type="text" lay-key="1">
+            <button type="button" class="btn btn-primary searchBtn">查询</button>
+            <button type="button" class="btn btn-primary showAllBtn">显示全部</button>
+            <button type="button" class="btn btn-primary addBtn">增加</button>
+              <button type="button" class="btn btn-primary statisticsBtn">统计</button>
+        </div>
+    </form>
+    <div class="tableContainer">
+        <table class="table table-hover userTable">
+            <thead>
+                <tr>
+                    <th>日期</th>
+                    <th>到站</th>
+                    <th>收货人姓名</th>
+                    <th>电话</th>
+                    <th>中转站</th>
+                    <th>中转站电话</th>
+                    <th>品名</th>
+                    <th>运费</th>
+                    <th>中转费</th>
+                    <th colspan="2">编辑</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>        
+    </div>
+</div>
+<script type="text/javascript">
+var isLogin = {{ isLogin }};
+var userid = {{ userinfo.id }};
+console.log(userid);
+</script>
+{% endblock %} {% block bottomContent %}
+<script type="text/javascript" src="javascripts/statistics.js">
+</script>
+{% endblock %}
