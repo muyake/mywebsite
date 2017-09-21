@@ -10,7 +10,6 @@ pub = {
         }
     }
 };
-
 var components = {
     /**
      * 重写确认框 fun:函数对象 params:参数列表， 可以是数组
