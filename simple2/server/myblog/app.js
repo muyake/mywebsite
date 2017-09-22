@@ -59,6 +59,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //路由的处理
 app.use('/index', checkLogin);
 app.use('/statistics', checkLogin);
+app.use('/inventory', checkLogin);
 app.use('/login', checkNotLogin); //已经等录了，就跳转到主页面
 app.use('/reg', checkNotLogin); //已经等录了，就跳转到主页面
 

@@ -1,35 +1,30 @@
 {% extends './layout.html' %} {% block topContent %}
-<link rel="stylesheet" href="../stylesheets/static.css">
+<link rel="stylesheet" href="../stylesheets/statistics.css">
 <script type="text/javascript" src="javascripts/lib/laydate.js"></script>
 {% endblock %} {% block mainContent %}
 <div class="btnList">
     <form role="form" class="form-inline">
         <div class="form-group">
-            <label for="searchTime" class="sr-only">时间：</label>
-            <input id="searchTime" type="text" lay-key="1">
+            <label for="startTime" class="sr-only">起始时间：</label>
+            <input id="startTime" type="text" lay-key="1">
+             <label for="endTime" class="sr-only">截至时间：</label>
+            <input id="endTime" type="text" lay-key="2">
             <button type="button" class="btn btn-primary searchBtn">查询</button>
-            <button type="button" class="btn btn-primary showAllBtn">显示全部</button>
-            <button type="button" class="btn btn-primary addBtn">增加</button>
-              <button type="button" class="btn btn-primary statisticsBtn">统计</button>
+            <button type="button" class="btn btn-primary returnDetails">返回详情</button>
         </div>
     </form>
     <div class="tableContainer">
         <table class="table table-hover userTable">
             <thead>
                 <tr>
-                    <th>日期</th>
-                    <th>到站</th>
-                    <th>收货人姓名</th>
-                    <th>电话</th>
-                    <th>中转站</th>
-                    <th>中转站电话</th>
-                    <th>品名</th>
-                    <th>运费</th>
-                    <th>中转费</th>
-                    <th colspan="2">编辑</th>
+                    <th>起始时间</th>
+                    <th>截至时间</th>
+                    <th>运费总额</th>
+                    <th>中转费总额</th>
+                    <th>利润总额</th>                   
                 </tr>
             </thead>
-            <tbody>
+            <tbody>               
             </tbody>
         </table>        
     </div>

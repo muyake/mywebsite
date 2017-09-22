@@ -2,3 +2,6 @@
 .navbar-inner .container,#contrainer{
 	width: 1200px;
 }
+#contrainer{
+	min-height: 780px;
+}
