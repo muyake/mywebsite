@@ -29,14 +29,14 @@ router.get('/getInventoryList', function(req, res, next) {
             res.send({
                 code: 200,
                 data: result,
-                
+
             });
         }
     });
 });
 //处理函数
 router.get('/get', function(req, res, next) {
-    var arg = url.parse(req.url, true).query;   
+    var arg = url.parse(req.url, true).query;
     var manageInventory = new ManageInventory({
         userid: arg.userid,
         size: arg.size,
@@ -57,7 +57,7 @@ router.get('/get', function(req, res, next) {
         } else {
             res.send({
                 code: 200,
-                data: result,              
+                data: result,
             });
         }
     });
@@ -95,11 +95,15 @@ router.post('/inventorySave', function(req, res, next) { //当路由捕捉到url
         telephone: req.body.telephone,
         interchange: req.body.interchange,
         interchangeTel: req.body.interchangeTel,
-         product:req.body.product,
+        product: req.body.product,
         freight: req.body.freight,
-        transit:req.body.transit,
+        transit: req.body.transit,
+        pack: req.body.pack,
+        weight: req.body.weight,
+        count: req.body.count,
+
     });
-    console.log("ss"+req.body.transit);
+    console.log("ss" + req.body.transit);
     inventory.save(function(err, result) {
         console.log('1111');
         if (err) { //如果存入时报错
@@ -125,11 +129,14 @@ router.post('/inventoryEdit', function(req, res, next) { //当路由捕捉到url
         Consignee: req.body.Consignee,
         destination: req.body.destination,
         telephone: req.body.telephone,
-          interchange: req.body.interchange,
+        interchange: req.body.interchange,
         interchangeTel: req.body.interchangeTel,
-         product:req.body.product,
+        product: req.body.product,
         freight: req.body.freight,
-        transit:req.body.transit,
+        transit: req.body.transit,
+        pack: req.body.pack,
+        weight: req.body.weight,
+        count: req.body.count,
     });
     inventory.edit(function(err, result) {
         //console.log('1111');

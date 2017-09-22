@@ -7,3 +7,6 @@
 .searchBtn{
     margin:0 10px;
 }
+#addModal,#editModal{
+	top:5%;
+}

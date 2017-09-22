@@ -14,23 +14,19 @@ var mainObj = {
             keys.forEach(function(item2) {
                 item[item2] = item[item2] || '';
             })
-            trList += '<tr data-id=' + item.id + ' data-userid=' + item.userid + ' data-transit=' + item.transit + ' data-product=' + item.product + ' data-interchange=' + item.interchange + '  data-addDate=' + item.addDate + '  data-destination=' + item.destination + '  data-consignee=' + item.Consignee + '  data-telephone=' + item.telephone + '  data-interchangeTel=' + item.interchangeTel + '  data-freight=' + item.freight + ' >\
+            trList += '<tr data-id=' + item.id + ' data-pack=' + item.pack + ' data-weight=' + item.weight + ' data-count=' + item.count + ' data-userid=' + item.userid + ' data-transit=' + item.transit + ' data-product=' + item.product + ' data-interchange=' + item.interchange + '  data-addDate=' + item.addDate + '  data-destination=' + item.destination + '  data-consignee=' + item.Consignee + '  data-telephone=' + item.telephone + '  data-interchangeTel=' + item.interchangeTel + '  data-freight=' + item.freight + ' >\
                         <td>' + item.addDate + '</td>\
                         <td>' + item.destination + '</td>\
                         <td>' + item.Consignee + '</td>\
                         <td>' + item.telephone + '</td>\
-                        <td>' + item.interchange + '</td>\
-                        <td>' + item.interchangeTel + '</td>\
                          <td>' + item.product + '</td>\
-                        <td>' + item.freight + '</td>\
-                          <td>' + item.transit + '</td>\
-                        <td>\
-                        <button type="button" class="btn btn-default edit btn-sm" style="margin-right:15px;">编辑</button>\
-                        </td>\
-                        <td>\
-                        <button type="button" class="btn btn-default del btn-sm" style="margin-right:15px;">删除</button>\
-                        </td>\
-                </tr>'
+                          <td>' + item.count + '</td>\
+                          <td>' + item.pack + '</td>\
+                            <td>' + item.weight + '</td>\
+                        <td>' + item.interchange + '</td>\
+                        <td>' + item.interchangeTel + '</td><td> ' + item.freight + '</td><td> ' + item.transit + ' </td>\ <td > \
+                <button type="button" class="btn btn-default edit btn-sm" style="margin-right:15px;">编辑</button>\ </td>\ <td > \
+                <button type="button" class="btn btn-default del btn-sm" style="margin-right:15px;">删除</button>\ </td>\ </tr>'
         });
         $('.userTable tbody').append(trList);
     },
@@ -121,10 +117,11 @@ var mainObj = {
         $(containStr + ' .interchange').val('');
         $(containStr + ' .interchangeTel').val('');
         $(containStr + ' .freight').val('');
-        $(containStr + ' .telephone_alert').css({
-            'visibility': 'hidden'
-        });
-        $(containStr + ' .interchangeTel_alert').css({
+
+        $(containStr + ' .pack').val('');
+        $(containStr + ' .count').val('');
+        $(containStr + ' .count').val('');
+        $(containStr + ' [class~="_alert"]').css({
             'visibility': 'hidden'
         });
     },
@@ -179,6 +176,24 @@ var mainObj = {
         } else {
             $(containStr + ' .transit_alert').css("visibility", "hidden");
         }
+
+        var pack = $(containStr + ' .pack').val();
+        var weight = $(containStr + ' .weight').val();
+        if (isNaN(weight)) {
+            $(containStr + ' .weight_alert').css("visibility", "visible");
+            flag = false;
+        } else {
+            $(containStr + ' .weight_alert').css("visibility", "hidden");
+        }
+
+        var count = $(containStr + ' .count').val();
+        if (isNaN(count)) {
+            $(containStr + ' .count_alert').css("visibility", "visible");
+            flag = false;
+        } else {
+            $(containStr + ' .count_alert').css("visibility", "hidden");
+        }
+
         if (!flag) {
             return;
         }
@@ -194,6 +209,10 @@ var mainObj = {
             product: product,
             freight: freight,
             transit: transit,
+            pack: pack,
+            weight: weight,
+            count: count,
+
         }
         if (status == 0) {
             $.post("/inventory/inventorySave", inventory, function(data) {
@@ -267,6 +286,9 @@ var mainObj = {
             $('#editModal .freight').val(tr.attr('data-freight'));
             $('#editModal .product').val(tr.attr('data-product'));
             $('#editModal .transit').val(tr.attr('data-transit'));
+            $('#editModal .pack').val(tr.attr('data-pack'));
+            $('#editModal .weight').val(tr.attr('data-weight'));
+            $('#editModal .count').val(tr.attr('data-count'));
             $('#btnedit').attr('data-id', tr.attr('data-id'));
             $('#editModal').modal({
                 keyboard: false,
