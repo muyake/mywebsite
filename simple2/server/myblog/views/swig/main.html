@@ -19,6 +19,8 @@
             <thead>
                 <tr>
                     <th>日期</th>
+                    <th>发货人</th>
+                    <th>发货人电话</th>
                     <th>到站</th>
                     <th>收货人姓名</th>
                     <th>电话</th>
@@ -59,6 +61,20 @@ console.log(userid);
                         <div class="col-sm-10">
                             <input id="addDate" type="text" placeholder="请输入日期" class="form-control addDate" lay-key="2">
                             <p class="dt_alert help-block displayInline">日期不能为空</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="consignor" class="col-sm-2 control-label">发货人</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="请输入发货人" class="form-control consignor">
+                            <p class="consignor_alert help-block displayInline">到站不能为空</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="consignorphone" class="col-sm-2 control-label">发货人电话</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="请输入发货人电话" class="form-control consignorphone">
+                            <p class="consignorphone_alert help-block displayInline">电话格式不对</p>
                         </div>
                     </div>
                     <div class="form-group">
@@ -163,6 +179,20 @@ console.log(userid);
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="consignor" class="col-sm-2 control-label">发货人</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="请输入发货人" class="form-control consignor">
+                            <p class="consignor_alert help-block displayInline">到站不能为空</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="consignorphone" class="col-sm-2 control-label">发货人电话</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="请输入发货人电话" class="form-control consignorphone">
+                            <p class="consignorphone_alert help-block displayInline">电话格式不对</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="destination" class="col-sm-2 control-label">目的地</label>
                         <div class="col-sm-10">
                             <input type="text" placeholder="请输入目的地" class="form-control destination">
@@ -183,7 +213,7 @@ console.log(userid);
                             <p class="telephone_alert help-block displayInline">电话格式不对</p>
                         </div>
                     </div>
-                     <div class="form-group">
+                    <div class="form-group">
                         <label for="product" class="col-sm-2 control-label">品名</label>
                         <div class="col-sm-10">
                             <input type="text" placeholder="请输入品名" class="form-control product">
@@ -224,7 +254,7 @@ console.log(userid);
                             <input type="text" placeholder="请输入中转站电话" class="form-control interchangeTel">
                             <p class="interchangeTel_alert help-block displayInline">电话格式不对</p>
                         </div>
-                    </div>                  
+                    </div>
                     <div class="form-group">
                         <label for="freight" class="col-sm-2 control-label">运费</label>
                         <div class="col-sm-10">

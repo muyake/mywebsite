@@ -14,8 +14,10 @@ var mainObj = {
             keys.forEach(function(item2) {
                 item[item2] = item[item2] || '';
             })
-            trList += '<tr data-id=' + item.id + ' data-pack=' + item.pack + ' data-weight=' + item.weight + ' data-count=' + item.count + ' data-userid=' + item.userid + ' data-transit=' + item.transit + ' data-product=' + item.product + ' data-interchange=' + item.interchange + '  data-addDate=' + item.addDate + '  data-destination=' + item.destination + '  data-consignee=' + item.Consignee + '  data-telephone=' + item.telephone + '  data-interchangeTel=' + item.interchangeTel + '  data-freight=' + item.freight + ' >\
+            trList += '<tr data-id=' + item.id + ' data-pack=' + item.pack + ' data-consignor=' + item.consignor + ' data-consignorphone=' + item.consignorphone + ' data-weight=' + item.weight + ' data-count=' + item.count + ' data-userid=' + item.userid + ' data-transit=' + item.transit + ' data-product=' + item.product + ' data-interchange=' + item.interchange + '  data-addDate=' + item.addDate + '  data-destination=' + item.destination + '  data-consignee=' + item.Consignee + '  data-telephone=' + item.telephone + '  data-interchangeTel=' + item.interchangeTel + '  data-freight=' + item.freight + ' >\
                         <td>' + item.addDate + '</td>\
+                           <td>' + item.consignor + '</td>\
+                              <td>' + item.consignorphone + '</td>\
                         <td>' + item.destination + '</td>\
                         <td>' + item.Consignee + '</td>\
                         <td>' + item.telephone + '</td>\
@@ -139,8 +141,19 @@ var mainObj = {
             flag = false;
         }
         var destination = $(containStr + ' .destination').val();
-
         var Consignee = $(containStr + ' .Consignee').val();
+
+        var consignor = $(containStr + ' .consignor').val();
+
+        var consignorphone = $(containStr + ' .consignorphone').val();
+
+        if (pub.checkTel(consignorphone)) {
+            $(containStr + ' .consignorphone_alert').css("visibility", "hidden");
+        } else {
+            $(containStr + ' .consignorphone_alert').css("visibility", "visible");
+            flag = false;
+        }
+
 
         var telephone = $(containStr + ' .telephone').val();
         if (pub.checkTel(telephone)) {
@@ -194,12 +207,14 @@ var mainObj = {
             $(containStr + ' .count_alert').css("visibility", "hidden");
         }
 
-        if (!flag) {
-            return;
-        }
+        // if (!flag) {
+        //     return;
+        // }
 
         var inventory = {
             userid: userid,
+            consignor: consignor,
+            consignorphone: consignorphone,
             addDate: addDate,
             Consignee: Consignee,
             destination: destination,
@@ -278,6 +293,8 @@ var mainObj = {
             var tr = $(this).closest('tr');
             var editForm = $('#editModal');
             $('#editModal .addDate').val(tr.attr('data-addDate'));
+            $('#editModal .consignor').val(tr.attr('data-consignor'));
+            $('#editModal .consignorphone').val(tr.attr('data-consignorphone'));
             $('#editModal .destination').val(tr.attr('data-destination'));
             $('#editModal .Consignee').val(tr.attr('data-Consignee'));
             $('#editModal .telephone').val(tr.attr('data-telephone'));

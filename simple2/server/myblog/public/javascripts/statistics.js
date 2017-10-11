@@ -27,7 +27,7 @@ var statistics = {
 			item.totaltransit = item.totaltransit || 0;
 			trList = '<tr>\
                     <td>' + self.startTime + '</td>\
-                    <td>' + self.endTime + '</td><td>' + item.totalfreight + '</td><td>' + item.totaltransit + '</td><td> ' + (item.totalfreight - item.totaltransit) + ' </td></tr>';
+                    <td>' + self.endTime + '</td><td>' + item.totalfreight + '</td><td>' + item.totaltransit + '</td></tr>';
 		});
 		$('.userTable tbody').append(trList);
 	},

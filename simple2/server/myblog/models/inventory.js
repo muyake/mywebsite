@@ -5,6 +5,10 @@ function Inventory(inventory) { // 这是一个inventory类，传递的参数是
     this.id = parseInt(inventory.id);
     this.userid = inventory.userid;
     this.addDate = inventory.addDate;
+
+    this.consignor = inventory.consignor;
+    this.consignorphone = inventory.consignorphone;
+
     this.Consignee = inventory.Consignee;
     this.destination = inventory.destination;
     this.telephone = inventory.telephone;
@@ -25,9 +29,10 @@ Inventory.prototype.save = function(callback) {
         console.log('Inventory save');
 
         db.con(function(connect) {
-
+            console.log('aaaa');
+            console.log(self.consignor);
             // 数据库的表名为inventory，字段名为name和password  
-            connect.query("INSERT INTO inventory(userid,addDate,Consignee,destination,telephone,interchange,interchangeTel,product,freight,transit,pack,weight,count) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)", [self.userid, self.addDate, self.Consignee, self.destination, self.telephone, self.interchange, self.interchangeTel, self.product, self.freight, self.transit, self.pack, self.weight, self.count], function(err, result) {
+            connect.query("INSERT INTO inventory(userid,consignor,consignorphone,addDate,Consignee,destination,telephone,interchange,interchangeTel,product,freight,transit,pack,weight,count) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [self.userid, self.consignor, self.consignorphone, self.addDate, self.Consignee, self.destination, self.telephone, self.interchange, self.interchangeTel, self.product, self.freight, self.transit, self.pack, self.weight, self.count], function(err, result) {
 
 
                 if (err) { //如果出错，那么错误信息作为回调函数的参数返回  
@@ -72,7 +77,7 @@ Inventory.prototype.edit = function(callback) {
         return callback("You can't delete inventory information without id!");
     }
     db.con(function(connect) {
-        connect.query('UPDATE inventory SET userid= ?,addDate= ?,Consignee= ?,destination= ?,telephone= ?,interchange= ?,interchangeTel= ?,product= ?,freight= ?,transit= ? ,pack= ?, weight= ?, count= ? WHERE id = ?', [self.userid, self.addDate, self.Consignee, self.destination, self.telephone, self.interchange, self.interchangeTel, self.product, self.freight, self.transit, self.pack, self.weight, self.count, self.id], function(err, result) {
+        connect.query('UPDATE inventory SET userid= ?,consignor= ?,consignorphone= ?,addDate= ?,Consignee= ?,destination= ?,telephone= ?,interchange= ?,interchangeTel= ?,product= ?,freight= ?,transit= ? ,pack= ?, weight= ?, count= ? WHERE id = ?', [self.userid, self.consignor, self.consignorphone, self.addDate, self.Consignee, self.destination, self.telephone, self.interchange, self.interchangeTel, self.product, self.freight, self.transit, self.pack, self.weight, self.count, self.id], function(err, result) {
             if (err) { //报错  
                 console.log("'SELECT  FROM inventory WHERE id =" + self.id + " error, the err information is " + err);
                 return callback(err);

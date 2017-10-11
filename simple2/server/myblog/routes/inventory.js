@@ -90,6 +90,8 @@ router.post('/inventorySave', function(req, res, next) { //当路由捕捉到url
     var inventory = new Inventory({ //生成一个User的实例，并赋给他name和passowrd属性  
         userid: req.body.userid,
         addDate: req.body.addDate,
+        consignor: req.body.consignor,
+        consignorphone: req.body.consignorphone,
         Consignee: req.body.Consignee,
         destination: req.body.destination,
         telephone: req.body.telephone,
@@ -126,6 +128,8 @@ router.post('/inventoryEdit', function(req, res, next) { //当路由捕捉到url
         id: req.body.id,
         userid: req.body.userid,
         addDate: req.body.addDate,
+        consignor: req.body.consignor,
+        consignorphone: req.body.consignorphone,
         Consignee: req.body.Consignee,
         destination: req.body.destination,
         telephone: req.body.telephone,
