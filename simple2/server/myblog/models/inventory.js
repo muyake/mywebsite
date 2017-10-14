@@ -36,7 +36,7 @@ Inventory.prototype.save = function(callback) {
 
 
                 if (err) { //如果出错，那么错误信息作为回调函数的参数返回  
-                    console.log("INSERT name:" + self.name + ", password:" + self.password + " error, the err information is " + err);
+                    console.log("INSERT name:" + self.freight + ", password:" + self.weight + " error, the err information is " + err);
                     return callback(err);
                 }
                 callback(null, result); //如果正常执行，那么第一个参数为null（无错误），第二个参数为返回的结果  
