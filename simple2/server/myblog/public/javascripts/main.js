@@ -113,16 +113,23 @@ var mainObj = {
     resetAddFrom: function(status) {
         var containStr = status == 0 ? "#addModal" : "#editModal";
         $(containStr + ' .addDate').val('');
+
+        $(containStr + ' .consignor').val('');
+        $(containStr + ' .consignorphone').val('');
+
         $(containStr + ' .destination').val('');
         $(containStr + ' .Consignee').val('');
         $(containStr + ' .telephone').val('');
         $(containStr + ' .interchange').val('');
         $(containStr + ' .interchangeTel').val('');
         $(containStr + ' .freight').val('');
+        $(containStr + ' .weight').val('');
 
         $(containStr + ' .pack').val('');
         $(containStr + ' .count').val('');
-        $(containStr + ' .count').val('');
+        $(containStr + ' .product').val('');
+        $(containStr + ' .transit').val('');
+
         $(containStr + ' [class~="_alert"]').css({
             'visibility': 'hidden'
         });
@@ -207,9 +214,9 @@ var mainObj = {
             $(containStr + ' .count_alert').css("visibility", "hidden");
         }
 
-        // if (!flag) {
-        //     return;
-        // }
+        if (!flag) {
+            return;
+        }
 
         var inventory = {
             userid: userid,
