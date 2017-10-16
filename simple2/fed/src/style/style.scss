@@ -1,0 +1,73 @@
+body {
+    padding-top: 60px;
+    padding-botom: 40px;
+}
+
+.myalert {
+    position: absolute;
+}
+
+.displayNONE {
+    display: none;
+}
+
+#scrollToFoot {
+    border: 1px solid #ccc;
+    text-align: center;
+    font-size: 18px;
+    padding: 20px 0;
+}
+
+fotter p {
+    margin-top: 40px;
+    padding-top: 20px;
+    padding-right: 20px;
+    border-top: 1px solid #aaa;
+    font-size: 18px;
+    text-align: right;;
+
+}
+
+.row {
+    color: #555;
+}
+.displayNONE {
+    display: none;
+}
+/*公共*/
+.toast{
+    position: fixed;
+    width: 150px;
+    background: rgba(0,0,0,.8);
+    padding:10 20px;
+    border-radius: 6px;
+    z-index: 10001;
+    top:50%;
+    left: 50%;
+    -webkit-transform:translate3d(-50%,-50%,0);
+    line-height: 1.5em;
+    text-align: center;
+    font-size: 24px;
+    color: #fff;
+}
+.navbar .nav{
+    float:right;
+}
+.table th, .table td{
+    text-align: center;
+    vertical-align: middle;
+}
+.form-group{
+    margin-top: 8px;
+}
+.form-horizontal .control-label{
+    margin-right: 5px;
+}
+.displayInline{
+    display: inline-block;
+    visibility:hidden;
+    color:#b94a48;
+}
+.form-horizontal .control-label{
+    line-height: 34px;
+}

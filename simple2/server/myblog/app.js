@@ -18,6 +18,14 @@ var inventory = require('./routes/inventory');
 var statistics = require('./routes/statistics');
 //var getUserList = require('./routes/getUserList');
 var app = express();
+//允许跨域访问
+app.all('*', function(req, res, next) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+	res.header("Access-Control-Allow-Headers", "X-Requested-With");
+	res.header('Access-Control-Allow-Headers', 'Content-Type');
+	next();
+});
 //session  
 var session = require('express-session');
 app.use(session({
@@ -93,6 +101,8 @@ app.use('/userManager', userManager); //用户管理
 app.use('/language', lan); //切换语言的
 app.use('/index', index);
 app.use('/users', users);
+
+
 app.use('/reg', reg); //注册的，reg.js来处理  
 app.use('/login', login); //登录的，login来处理
 app.use('/post', postBlog); //提交博客

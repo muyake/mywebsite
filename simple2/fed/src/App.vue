@@ -1,39 +1,72 @@
-
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>   
-   <firstcomponent></firstcomponent>
-   <ul>
-     <li>
-       <router-link to='/first'>点我跳转到第一页</router-link>
-       <router-link to='/second'>点我跳转到第二页</router-link>
-     </li>
-   </ul>
-   <router-view class='view'></router-view>
+  <div id='contenter'>
+    <cnode-head v-bind:username="username" :isLogin="isLogin"></cnode-head>
+    <router-view name='main'></router-view>
+    <router-view name='side' ref='child'></router-view>
   </div>
 </template>
-
 <script>
-import firstcomponent from './components/firstcomponent.vue'
+import cnodeHead from './components/header';
 export default {
-  name:'App',
-  data(){
-    return{
-      msg:'hello App!'
+  name: 'app',
+  data() {
+    return {
+      isLogin: false,
+      username: '',
+    };
+  },
+  components: {
+    cnodeHead,
+  },
+  watch: {
+    // authorName(val) {
+    //     this.$refs.child.name = val;
+    // },
+  },
+  created() {
+    this.userInfo();
+  },
+  methods: {
+    userInfo() { 
+       this.$http({
+        url: 'http://localhost:881/users/getUserInfo',
+        method: 'get',       
+      }).then((res) => {
+        this.isLogin = res.isLogin;
+        if(this.isLogin){
+            this.username= res.userinfo.name;
+            this.id= res.userinfo.id;
+        }
+      }).catch((res) => {
+        console.log('登录信息请求错误 ', res);
+      });
     }
   },
-  components:{firstcomponent}
-}
-</script>
+};
 
+</script>
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+#contenter {
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 6rem;
+  display: flex;
+  justify-content: space-around;
+  font-size: 22px;
+  word-break: break-all;
 }
+
+body,
+div,
+span,
+a,
+p,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
 </style>

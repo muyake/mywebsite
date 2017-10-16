@@ -1,6 +1,6 @@
-# myvue1
+# myfirstvue
 
-> [3~这是��我的第一个vue项目
+> 我的第一个vue项目
 
 ## Build Setup
 
@@ -27,4 +27,5 @@ npm run e2e
 npm test
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+参考文献http://blog.csdn.net/FungLeo/article/details/53199436

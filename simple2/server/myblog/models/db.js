@@ -1,16 +1,16 @@
 var mysql = require("mysql"); //调用nodejs和mysql交互的模块；  
 var pool = mysql.createPool({ //创建连接池  
     // // host: '118.190.156.135', //表示本地的数据库  
-    // user: 'root', //账号  
-    // password: 'abcmyk123', //密码  
-    // port: '3306', //默认端口  
-    // database: 'blog2' //库名  
+    user: 'root', //账号  
+    password: 'abcmyk123', //密码  
+    port: '3306', //默认端口  
+    database: 'blog2' //库名
     //host: '182.92.153.2',
 
-    user: 'root',
-    password: '7c970ef5ea',
-    port: '3306',
-    database: 'blog'
+    // user: 'root',
+    // password: '7c970ef5ea',
+    // port: '3306',
+    // database: 'blog'
 })
 var db = {};
 db.con = function(callback) { //callback是回调函数，连接建立后的connection作为其参数  
