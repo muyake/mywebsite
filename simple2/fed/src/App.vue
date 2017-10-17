@@ -12,7 +12,8 @@ export default {
   data() {
     return {
       isLogin: false,
-      username: '',
+      username: '',  
+      id:'111',    
     };
   },
   components: {
@@ -36,6 +37,8 @@ export default {
         if(this.isLogin){
             this.username= res.userinfo.name;
             this.id= res.userinfo.id;
+        }else{
+           this.$router.push('/login');
         }
       }).catch((res) => {
         console.log('登录信息请求错误 ', res);

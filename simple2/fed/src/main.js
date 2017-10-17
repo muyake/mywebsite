@@ -38,7 +38,7 @@ import '../static/ue/lang/zh-cn/zh-cn.js'
 import '../static/ue/ueditor.parse.min.js'
 
 // 跑起来吧
-new Vue({
+var vm = new Vue({
 	router,
 	el: '#app',
 	render: (h) => h(App)
