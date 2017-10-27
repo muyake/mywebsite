@@ -1,0 +1,39 @@
+{% extends './layout.html' %} {% block topContent %}
+<link rel="stylesheet" href="../stylesheets/statistics.css">
+<script type="text/javascript" src="javascripts/lib/laydate.js"></script>
+{% endblock %} {% block mainContent %}
+<div class="btnList">
+    <form role="form" class="form-inline">
+        <div class="form-group">
+            <label for="startTime" class="sr-only">起始时间：</label>
+            <input id="startTime" type="text" lay-key="1">
+             <label for="endTime" class="sr-only">截至时间：</label>
+            <input id="endTime" type="text" lay-key="2">
+            <button type="button" class="btn btn-primary searchBtn">查询</button>
+            <button type="button" class="btn btn-primary returnDetails">返回详情</button>
+        </div>
+    </form>
+    <div class="tableContainer">
+        <table class="table table-hover userTable">
+            <thead>
+                <tr>
+                    <th>起始时间</th>
+                    <th>截至时间</th>
+                    <th>运费总额</th>
+                    <th>中转费总额</th>                 
+                </tr>
+            </thead>
+            <tbody>               
+            </tbody>
+        </table>        
+    </div>
+</div>
+<script type="text/javascript">
+var isLogin = {{ isLogin }};
+var userid = {{ userinfo.id }};
+console.log(userid);
+</script>
+{% endblock %} {% block bottomContent %}
+<script type="text/javascript" src="javascripts/statistics.js">
+</script>
+{% endblock %}

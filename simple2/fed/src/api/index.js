@@ -1,5 +1,5 @@
 // 配置API接口地址(通过config/index配制成通用接口，即不用写https://cnodejs.org)
-var root = 'https://cnodejs.org/api/v1'
+var root = 'http://localhost:882'
   // 引用axios
 var axios = require('axios')
   // 自定义判断元素类型JS

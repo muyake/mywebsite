@@ -1,0 +1,65 @@
+extends layout  
+block content  
+    div.hero-unit  
+        h1  我的博客  
+        p   这个是基于Nodejs作为后台，jade作为模板来，使用了Express作为框架  
+            br  
+            br  
+            //这部分暂时用1替代，后续会被更新  
+            if(!user())
+                br  
+                br  
+                a.btn.btn-primary.btn-large(href="/login")  登录  
+                a.btn.btn-large(href="/reg")    立即注册  
+            else  
+                textarea#textarea.uneditable-input  
+                button#postBlog.btn.btn-large 提交微博#{username}1
+                button#clearBlog.btn.btn-large 清空  
+            div#submitError.alert.alert-error.displayNONE.myalert  
+            div#submitSuccess.alert.alert-success.displayNONE  
+  
+    div.row.content#content
+        div.span4  
+            h2  烟雨江南说  
+            p   当欲望没有了枷锁，就没有了向前的路  
+            p   只有转左，或者向右  
+            p   左边是地狱，右边也是地狱  
+        div.span4  
+            h2  烟雨江南说  
+            p   那些都是极好极好的  
+            p   可是我偏偏不喜欢  
+        div.span4  
+            h2  烟雨江南说  
+            p   我不怕傻  
+            p   只怕  
+            p   遇不到  
+            p   可以让我变傻的人  
+        div.span4  
+            h2  烟雨江南说  
+            p   人在年轻的时候总会有些莫名的坚持，  
+            p   并且以此感动着自己，  
+            p   却时常会在不经意间让真正重要的东西从指间流走。  
+        div.span4  
+            h2  烟雨江南说  
+            p   记忆真是一种奇怪的东西，  
+            p   有时候会涤荡所有的苦难，只留下温情，  
+            p   有时候却磨灭掉曾有的欢乐，唯剩下苍白和丑陋。  
+        div.span4  
+            h2  烟雨江南说  
+            p   那存在的，都是幻影。  
+            p   那永恒的，终将毁灭。  
+            p   世界万物，缤纷色彩，都是被蒙蔽的人心罢了。  
+        div.span4  
+            h2  烟雨江南说  
+            p   诸神以真相示人，而世人却视而不见  
+        div.span4  
+            h2  烟雨江南说  
+            p   只有绵羊会向狮子要求平等，  
+            p   而狮子们从来不会这样想。  
+        div.span4  
+            h2  烟雨江南说  
+            p   愿迷途的旅人，从此得享安息。  
+            p   因理想而不朽，因归返而救赎。  
+    div#scrollToFoot 滚动到底部然后加载内容
+    script(type="text/javascript",src='../javascripts/index.js')
+

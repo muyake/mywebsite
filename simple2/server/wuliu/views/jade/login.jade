@@ -1,0 +1,21 @@
+extends systemlayout
+block content  
+    script(type="text/javascript",src='javascripts/login.js')
+    div.form-horizontal
+        fieldset
+            legend  登录
+            div.control-group
+                label.control-label(for='username') 用户名
+                div.controls
+                    input.input-xlarge#username(name='username',type='text')
+                    p.help-block.displayNONE#name-alert
+            div.control-group
+                label.control-label(for='password') 密码
+                div.controls
+                    input.input-xlarge#password(name='password',type='password')
+                    p.help-block.displayNONE#pw-alert
+            div.form-actions
+                a.btn.btn-default(href="/reg")    立即注册  
+                button.btn.btn-primary#submit(style='margin-left:30px;') 登录
+block bottomContent
+    script(type="text/javascript",src='javascripts/login.js')

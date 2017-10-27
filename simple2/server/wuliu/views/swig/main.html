@@ -1,0 +1,283 @@
+{% extends './layout.html' %} {% block topContent %}
+<link rel="stylesheet" href="../stylesheets/main.css">
+<script type="text/javascript" src="javascripts/lib/jquery.page.js"></script>
+<script type="text/javascript" src="javascripts/lib/laydate.js"></script>
+{% endblock %} {% block mainContent %}
+<div class="btnList">
+    <form role="form" class="form-inline">
+        <div class="form-group">
+            <label for="searchTime" class="sr-only">时间：</label>
+            <input id="searchTime" type="text" lay-key="1">
+            <button type="button" class="btn btn-primary searchBtn">查询</button>
+            <button type="button" class="btn btn-primary showAllBtn">显示全部</button>
+            <button type="button" class="btn btn-primary addBtn">增加</button>
+            <button type="button" class="btn btn-primary statisticsBtn">统计</button>
+        </div>
+    </form>
+    <div class="tableContainer">
+        <table class="table table-hover userTable">
+            <thead>
+                <tr>
+                    <th>日期</th>
+                    <th>发货人</th>
+                    <th>发货人电话</th>
+                    <th>到站</th>
+                    <th>收货人姓名</th>
+                    <th>电话</th>
+                    <th>品名</th>
+                    <th>件数</th>
+                    <th>包装</th>
+                    <th>重量</th>
+                    <th>中转站</th>
+                    <th>中转站电话</th>
+                    <th>运费</th>
+                    <th>中转费</th>
+                    <th colspan="2">编辑</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <div class="pager">
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+var isLogin = {{ isLogin }};
+var userid = {{ userinfo.id }};
+console.log(userid);
+</script>
+{% endblock %} {% block bottomContent %}
+<div id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true" data-show="true" data-backdrop="static" class="modal fade">
+    <div role="document" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+                <h4 id="addModalLabel" class="modal-title">新增</h4></div>
+            <div style="max-height:none;" class="modal-body">
+                <form role="form" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="addDate" class="col-sm-2 control-label">日期</label>
+                        <div class="col-sm-10">
+                            <input id="addDate" type="text" placeholder="请输入日期" class="form-control addDate" lay-key="2">
+                            <p class="dt_alert help-block displayInline">日期不能为空</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="consignor" class="col-sm-2 control-label">发货人</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="请输入发货人" class="form-control consignor">
+                            <p class="consignor_alert help-block displayInline">到站不能为空</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="consignorphone" class="col-sm-2 control-label">发货人电话</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="请输入发货人电话" class="form-control consignorphone">
+                            <p class="consignorphone_alert help-block displayInline">电话格式不对</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="destination" class="col-sm-2 control-label">到站</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="请输入到站" class="form-control destination">
+                            <p class="destination_alert help-block displayInline">到站不能为空</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Consignee" class="col-sm-2 control-label">收货人姓名</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="请输入收货人姓名" class="form-control Consignee">
+                            <p class="Consignee_alert help-block displayInline">收货人不能为空</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="telephone" class="col-sm-2 control-label">电话</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="请输入电话" class="form-control telephone">
+                            <p class="telephone_alert help-block displayInline">电话格式不对</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="product" class="col-sm-2 control-label">品名</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="请输入品名" class="form-control product">
+                            <p class="product_alert help-block displayInline">品名不能为空</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="count" class="col-sm-2 control-label">件数</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="请输入件数" class="form-control count">
+                            <p class="count_alert help-block displayInline">件数必须是数字</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="pack" class="col-sm-2 control-label">包装</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="请输入包装" class="form-control pack">
+                            <p class="pack_alert help-block displayInline">包装不能为空</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="weight" class="col-sm-2 control-label">重量</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="请输入重量" class="form-control weight">
+                            <p class="weight_alert help-block displayInline">重量必须是数字</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="interchange" class="col-sm-2 control-label">中转站</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="请输入中转站" class="form-control interchange">
+                            <p class="interchange_alert help-block displayInline">中转站不能为空</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="interchangeTel" class="col-sm-2 control-label">中转站电话</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="请输入中转站电话" class="form-control interchangeTel">
+                            <p class="interchangeTel_alert help-block displayInline">电话格式不对</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="freight" class="col-sm-2 control-label">运费</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="请输入运费" class="form-control freight">
+                            <p class="freight_alert help-block displayInline">运费必须是数字</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="transit" class="col-sm-2 control-label">中转费</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="请输入中转站电话" class="form-control transit">
+                            <p class="transit_alert help-block displayInline">中转费必须是数字</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default"><span aria-hidden="true" class="glyphicon glyphicon-remove">关闭</span></button>
+                <button id="btnadd" type="button" class="btn btn-primary"><span aria-hidden="true" class="glyphicon glyphicon-floppy-disk">保存</span></button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="editModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true" data-show="true" data-backdrop="static" class="modal fade">
+    <div role="document" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+                <h4 id="editModalLabel" class="modal-title">修改</h4></div>
+            <div style="max-height:none;" class="modal-body">
+                <form role="form" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="addDate" class="col-sm-2 control-label">日期</label>
+                        <div class="col-sm-10">
+                            <input id="editDate" type="text" placeholder="请输入日期" class="form-control addDate" lay-key="3">
+                            <p class="dt_alert help-block displayInline">日期不能为空</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="consignor" class="col-sm-2 control-label">发货人</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="请输入发货人" class="form-control consignor">
+                            <p class="consignor_alert help-block displayInline">到站不能为空</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="consignorphone" class="col-sm-2 control-label">发货人电话</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="请输入发货人电话" class="form-control consignorphone">
+                            <p class="consignorphone_alert help-block displayInline">电话格式不对</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="destination" class="col-sm-2 control-label">目的地</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="请输入目的地" class="form-control destination">
+                            <p class="destination_alert help-block displayInline">目的地不能为空</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Consignee" class="col-sm-2 control-label">收货人姓名</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="请输入收货人姓名" class="form-control Consignee">
+                            <p class="Consignee_alert help-block displayInline">收货人姓名不能为空</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="telephone" class="col-sm-2 control-label">电话</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="请输入电话" class="form-control telephone">
+                            <p class="telephone_alert help-block displayInline">电话格式不对</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="product" class="col-sm-2 control-label">品名</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="请输入品名" class="form-control product">
+                            <p class="product_alert help-block displayInline">品名不能为空</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="count" class="col-sm-2 control-label">件数</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="请输入件数" class="form-control count">
+                            <p class="count_alert help-block displayInline">件数必须是数字</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="pack" class="col-sm-2 control-label">包装</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="请输入包装" class="form-control pack">
+                            <p class="pack_alert help-block displayInline">包装不能为空</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="weight" class="col-sm-2 control-label">重量</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="请输入重量" class="form-control weight">
+                            <p class="weight_alert help-block displayInline">重量必须是数字</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="interchange" class="col-sm-2 control-label">中转站</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="请输入中转站" class="form-control interchange">
+                            <p class="interchange_alert help-block displayInline">中转站不能为空</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="interchangeTel" class="col-sm-2 control-label">中转站电话</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="请输入中转站电话" class="form-control interchangeTel">
+                            <p class="interchangeTel_alert help-block displayInline">电话格式不对</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="freight" class="col-sm-2 control-label">运费</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="请输入运费" class="form-control freight">
+                            <p class="freight_alert help-block displayInline">运费必须是数字</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="transit" class="col-sm-2 control-label">中转费</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="请输入中转站电话" class="form-control transit">
+                            <p class="transit_alert help-block displayInline">中转费必须是数字</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default"><span aria-hidden="true" class="glyphicon glyphicon-remove">关闭</span></button>
+                <button id="btnedit" type="button" class="btnedit btn btn-primary"><span aria-hidden="true" class="glyphicon glyphicon-floppy-disk">保存</span></button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="javascripts/main.js">
+</script>
+{% endblock %}

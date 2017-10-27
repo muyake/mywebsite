@@ -32,10 +32,12 @@ module.exports = {
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
         proxyTable: {
-            '/api/v1/**': {
-                target: 'https://cnodejs.org', // 你接口的域名
-                secure: false,
-                changeOrigin: false,
+            '/api': {
+                target: 'http://localhost:882',
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/api': ''
+                }
             }
         },
         // CSS Sourcemaps off by default because relative paths are "buggy"

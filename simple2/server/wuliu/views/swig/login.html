@@ -1,0 +1,30 @@
+{% extends './layout.html' %} 
+{% block topContent %}
+ {% endblock %}
+  {% block mainContent %}
+<div class="form-horizontal">
+    <fieldset>
+        <legend> 登录</legend>
+        <div class="control-group">
+            <label for="username" class="control-label">用户名</label>
+            <div class="controls">
+                <input id="username" name="username" type="text" class="input-xlarge">
+                <p id="name-alert" class="help-block displayNONE"></p>
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="password" class="control-label">密码</label>
+            <div class="controls">
+                <input id="password" name="password" type="password" class="input-xlarge">
+                <p id="pw-alert" class="help-block displayNONE"></p>
+            </div>
+        </div>
+        <div class="form-actions"><a href="/reg" class="btn btn-default">   立即注册  </a>
+            <button id="submit" style="margin-left:30px;" class="btn btn-primary">登录</button>
+        </div>
+    </fieldset>
+</div>
+{% endblock %}
+ {% block bottomContent %}
+ <script type="text/javascript" src="javascripts/login.js"></script>
+ {% endblock %}

@@ -1,0 +1,38 @@
+extends systemlayout  
+block content  
+    script(type="text/javascript",src='javascripts/reg.js')  
+    div.form-horizontal  
+        fieldset  
+            legend  注册  
+            div.control-group  
+                label.control-label(for="username") 用户名  
+                div.controls  
+                    input.input-xlarge#username(type="text",name="username")  
+                    p.help-block#tips    你的账户名称，用于登录和提示  
+                    p.help-block.displayNONE#usrname-error  用户名不能为空  
+                    p.help-block.displayNONE#error-alert  
+  
+            div.control-group  
+                label.control-label(for="password") 密码  
+                div.controls  
+                    input.input-xlarge#password(type="password",name="password")  
+                    p.help-block.displayNONE#pw-error     密码不能为空  
+  
+            div.control-group  
+                label.control-label(for="captcha")  重复密码  
+                div.controls  
+                    input.input-xlarge#password-repeat(type="password",name="password-repeat")  
+                    p.help-block.displayNONE#pw-rp-error     两次密码需要一致  
+            
+            div.control-group  
+                label.control-label(for="captcha")  验证码  
+                div.controls  
+                    input.input-xlarge#captcha(type="text",name="captcha")  
+                    img.captcha(src='/getCaptcha' style='background:silver;margin:0 5px;')
+                    p.help-block.displayNONE#cc-error   
+  
+            div.form-actions  
+                //- button.btn.btn-priamry#submit-button   注册  
+                button.btn.btn-primary#submit-button(style='margin-right:30px;') 注册
+                a.btn.btn-default(href="/login")    登录  
+             

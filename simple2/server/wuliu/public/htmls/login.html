@@ -1,0 +1,61 @@
+<!DOCTYPE html  >
+<html>
+
+<head>
+    <title>物流管理系统</title>
+    <link rel="stylesheet" href="../stylesheets/bootstrapcss/bootstrap.min.css" />
+    <link rel="stylesheet" href="../stylesheets/blog.css" />
+    <script type="text/javascript" src="../javascripts/jq.js"></script>
+    <script type="text/javascript" src="../javascripts/bootstrapjs/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../javascripts/blog.js"></script>
+</head>
+
+</html>
+
+<body>
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container"><a data-toggle="collapse" data-target=".nav-collapse" class="btn btn-navbar"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a href="/" class="brand">物流管理系统</a>
+                <div class="nav-collapse">
+                    <ul class="nav">
+                        <li><a href="/">首页</a></li>
+                        <!--以下是修改后的部分-->
+                        <li><a href="/login">登入</a></li>
+                        <li><a href="/reg">注册</a></li>
+                        <li><a href="/language">切换语言</a></li>
+                        <li><a href="/userManager">用户管理</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="contrainer" class="container">
+        <script type="text/javascript" src="javascripts/login.js"></script>
+        <div class="form-horizontal">
+            <fieldset>
+                <legend> 登录</legend>
+                <div class="control-group">
+                    <label for="username" class="control-label">用户名</label>
+                    <div class="controls">
+                        <input id="username" name="username" type="text" class="input-xlarge" />
+                        <p id="name-alert" class="help-block displayNONE"></p>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="password" class="control-label">密码</label>
+                    <div class="controls">
+                        <input id="password" name="password" type="password" class="input-xlarge" />
+                        <p id="pw-alert" class="help-block displayNONE"></p>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button id="submit" class="btn btn-primary">登录 </button>
+                </div>
+            </fieldset>
+        </div>
+        <hr/>
+    </div>
+    <fotter>
+        <p> 作者：亚克西　　　邮箱：yake.mu@reren-inc.com</p>
+    </fotter>
+</body>

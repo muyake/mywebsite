@@ -29,20 +29,26 @@ export default {
   },
   methods: {
     userInfo() { 
-       this.$http({
-        url: 'http://localhost:881/users/getUserInfo',
-        method: 'get',       
-      }).then((res) => {
-        this.isLogin = res.isLogin;
-        if(this.isLogin){
-            this.username= res.userinfo.name;
-            this.id= res.userinfo.id;
-        }else{
-           this.$router.push('/login');
-        }
-      }).catch((res) => {
-        console.log('登录信息请求错误 ', res);
-      });
+      //  this.$http({
+      //   url: '/api/users/getUserInfo',
+      //   method: 'get',       
+      // }).then((res) => {
+      //   this.isLogin = res.isLogin;
+      //   if(this.isLogin){
+      //       this.username= res.userinfo.name;
+      //       this.id= res.userinfo.id;
+      //   }else{
+      //      this.$router.push('/login');
+      //   }
+      // }).catch((res) => {
+      //   console.log('登录信息请求错误 ', res);
+      // });
+      var isLogin=  localStorage.getItem('isLogin');
+      if(isLogin=='true'){
+        this.$router.push('/');
+      }else{
+        this.$router.push('/login');
+      }
     }
   },
 };
@@ -51,14 +57,8 @@ export default {
 <style>
 #contenter {
   font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  margin-top: 6rem;
-  display: flex;
-  justify-content: space-around;
-  font-size: 22px;
-  word-break: break-all;
+  width: 1300px;
+  margin:0 auto;
 }
 
 body,

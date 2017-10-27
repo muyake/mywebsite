@@ -1,0 +1,42 @@
+{% extends './layout.html' %} {% block topContent %} {% endblock %} {% block mainContent %}
+<div class="form-horizontal">
+    <fieldset>
+        <legend> 注册 </legend>
+        <div class="control-group">
+            <label for="username" class="control-label">用户名 </label>
+            <div class="controls">
+                <input id="username" type="text" name="username" class="input-xlarge">
+                <p id="tips" class="help-block"> 你的账户名称，用于登录和提示 </p>
+                <p id="usrname-error" class="help-block displayNONE"> 用户名不能为空 </p>
+                <p id="error-alert" class="help-block displayNONE"> </p>
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="password" class="control-label">密码 </label>
+            <div class="controls">
+                <input id="password" type="password" name="password" class="input-xlarge">
+                <p id="pw-error" class="help-block displayNONE"> 密码不能为空 </p>
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="captcha" class="control-label"> 重复密码 </label>
+            <div class="controls">
+                <input id="password-repeat" type="password" name="password-repeat" class="input-xlarge">
+                <p id="pw-rp-error" class="help-block displayNONE"> 两次密码需要一致 </p>
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="captcha" class="control-label"> 验证码 </label>
+            <div class="controls">
+                <input id="captcha" type="text" name="captcha" class="input-xlarge"><img src="/getCaptcha" style="background:silver;margin:0 5px;" class="captcha">
+                <p id="cc-error" class="help-block displayNONE"> </p>
+            </div>
+        </div>
+        <div class="form-actions">
+            <button id="submit-button" style="margin-right:30px;" class="btn btn-primary">注册</button><a href="/login" class="btn btn-default">   登录  </a></div>
+    </fieldset>
+</div>
+{% endblock %} {% block bottomContent %}
+<script type="text/javascript" src="javascripts/reg.js">
+</script>
+{% endblock %}

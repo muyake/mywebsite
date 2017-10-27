@@ -1,0 +1,33 @@
+doctype html  
+html
+    head
+        title 物流管理系统
+        link(rel='stylesheet', href='../stylesheets/bootstrapcss/bootstrap.min.css')
+        link(rel='stylesheet', href='../stylesheets/blog.css')
+        script(type="text/javascript",src='../javascripts/jq.js')
+        script(type="text/javascript",src='../javascripts/bootstrapjs/bootstrap.min.js')
+        block topContent
+body
+    div.navbar.navbar-fixed-top
+        div.navbar-inner
+            div.container
+                a.btn.btn-navbar(data-toggle="collapse",data-target=".nav-collapse")
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
+                a.brand(href="/") 物流管理系统
+                div.nav-collapse
+                    ul.nav                     
+                        //以下是修改后的部分
+                        if(isLogin)
+                            li
+                                a(href="javascript:void(0)") #{userinfo.name}
+                            li
+                                a(href="/logout") 退出
+    div#contrainer.container
+        block content
+        hr
+    fotter
+        p   欢迎使用本系统
+    block bottomContent
+   

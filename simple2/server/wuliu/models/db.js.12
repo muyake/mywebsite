@@ -1,0 +1,20 @@
+var mysql = require("mysql");
+var pool = mysql.createPool({
+
+    user: 'root',
+    password: '7c970ef5ea',
+    port: '3306',
+    database: 'blog'
+})
+var db = {};
+db.con = function(callback) {
+    pool.getConnection(function(err, connection) {
+        if (err) {
+            throw err;
+        } else {
+            callback(connection);
+        }
+        connection.release();
+    })
+}
+module.exports = db;
