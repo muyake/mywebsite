@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
             if (req.session.user) {
                 console.log(req.session.user);
                 return req.session.user;
-            } else
+            } else           
                 return null;
         }
     });
@@ -20,6 +20,7 @@ router.post('/', function(req, res, next) { //当路由捕捉到url为/reg的pos
     var captcha=req.body.captcha;
     console.log('我是验证码'+captcha);
     if(captcha&&captcha.length>0){
+        console.log(req.session);
         if(captcha!==req.session.captcha){
              return res.send({
                 code:1,

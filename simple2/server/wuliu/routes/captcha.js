@@ -16,6 +16,7 @@ router.get('/', function(req, res, next) { //捕获根url
             'Content-Type': 'image/png'
         });
         console.log(2111);
+        console.log( req.session.captcha);
         res.end(imgbase64);
 });
 

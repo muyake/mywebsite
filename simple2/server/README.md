@@ -10,3 +10,4 @@ mysql安装教程http://www.cnblogs.com/sshoub/p/4321640.html
 进入myblog 文件夹，执行npm install
 执行npm start 访问http://127.0.0.1:880/即可
 调试nodejs参考http://www.cnblogs.com/luoguixin/p/6346620.html
+pm2 http://www.cnblogs.com/zhoujie/p/nodejs4.html

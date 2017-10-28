@@ -1,7 +1,7 @@
 <template>
   <div id='contenter'>
-    <cnode-head v-bind:username="username" :isLogin="isLogin"></cnode-head>
-    <router-view name='main'></router-view>
+    <cnode-head v-on:exit="changeLoginStatus" v-bind:username="username" :isLogin="isLogin"></cnode-head>
+    <router-view name='main' v-on:login="changeLoginStatus"></router-view>
     <router-view name='side' ref='child'></router-view>
   </div>
 </template>
@@ -12,8 +12,7 @@ export default {
   data() {
     return {
       isLogin: false,
-      username: '',  
-      id:'111',    
+      username: '',
     };
   },
   components: {
@@ -28,23 +27,21 @@ export default {
     this.userInfo();
   },
   methods: {
-    userInfo() { 
-      //  this.$http({
-      //   url: '/api/users/getUserInfo',
-      //   method: 'get',       
-      // }).then((res) => {
-      //   this.isLogin = res.isLogin;
-      //   if(this.isLogin){
-      //       this.username= res.userinfo.name;
-      //       this.id= res.userinfo.id;
-      //   }else{
-      //      this.$router.push('/login');
-      //   }
-      // }).catch((res) => {
-      //   console.log('登录信息请求错误 ', res);
-      // });
+    changeLoginStatus:function(){     
+      if(localStorage.getItem('isLogin')=='true'){
+         this.isLogin=true;
+      }else{
+        this.isLogin=false;
+      }
+      if(localStorage.getItem('username')){
+        this.username=localStorage.getItem('username');   
+      }  
+    },
+    userInfo() {          
       var isLogin=  localStorage.getItem('isLogin');
       if(isLogin=='true'){
+        this.isLogin=true;
+        this.username=localStorage.getItem('username');         
         this.$router.push('/');
       }else{
         this.$router.push('/login');

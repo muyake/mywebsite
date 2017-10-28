@@ -70,6 +70,7 @@ export default {
   },
   created() {
     this.getData();
+    console.log(12);
   },
   methods: {
     getData() {
@@ -81,9 +82,10 @@ export default {
           pageNow: 1,
         };
       this.$http({
-        url: '/api/inventory/getInventoryList',
-        method: 'GET',
-        params: data
+        url: 'http://localhost:882/inventory/getInventoryList?userid=1&size=25&pageNow=1',
+        //cache:false
+         method: 'GET',
+         data: data
       }).then((res) => {      	
       	var data=res.data;
       	if(data.code==200){      		

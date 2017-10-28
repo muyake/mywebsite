@@ -37,9 +37,14 @@ export default {
     }
   },
   created() {
-    //this.getData()
+    this.getData()
   },
-  methods: {
+  methods: {   
+    getData(){ 
+        if(localStorage.getItem('isLogin')=='true'){
+           this.$router.push('/');
+        }
+    },
     login() {
       const self = this;
       var user = {
@@ -63,21 +68,23 @@ export default {
         self.passwordError = '密码不能为空';
         self.noPasswordError = false;
         flag = false;
-        return;
+       
       } else {
         self.passwordError = '';
         self.noPasswordError = true;
       }
       if (flag) {
         this.$http({
-          url: '/api/login',
+          url: 'http://localhost:882/login',
           method: 'post',
-          params: user
+          data: user
         }).then((res) => {
           if (res.data.code==0) {
             localStorage.setItem('userid',res.data.userinfo.id);
             localStorage.setItem('username',res.data.userinfo.name);
             localStorage.setItem('isLogin','true');
+            //self.$emit()
+            this.$emit('login')    
             self.$router.push('/');
           } else {
             self.noUserNameError = false;
@@ -95,8 +102,5 @@ export default {
 
 </script>
 <style>
-.article_list {
-  margin: auto;
-}
 
 </style>

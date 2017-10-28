@@ -6,7 +6,7 @@
           <ul class="nav">
             <template v-if="isLogin">
               <li><a href="javascript:void(0)">{{username}}</a></li>
-              <li><a href="/logout">退出</a></li>
+              <li><a  href="javascript:void(0)" v-on:click="exit">退出</a></li>
             </template>
           </ul>
         </div>
@@ -26,7 +26,21 @@ export default {
         type:String,
         default:''
     }
-  }
+  },
+   created() {
+    //this.getData()
+  },
+  methods: { 
+    exit:function(){
+      this.isLogin=false;
+      this.username='';
+      localStorage.removeItem('isLogin');
+      localStorage.removeItem('userid');
+      localStorage.removeItem('username');  
+      this.$emit('exit');    
+      this.$router.push('/login');
+    }
+  },
 };
 
 </script>
