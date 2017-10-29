@@ -38,8 +38,8 @@ ManageInventory.prototype.getList = function(callback) {
                     console.log("'SELECT  FROM inventory WHERE id =" + self.id + " error, the err information is " + err);
                     return callback(err);
                 }
-                returnobj.totalpage = result[0].totalcount;
-                returnobj.totalpage = Math.ceil(returnobj.totalpage / self.size);
+                returnobj.totalcount = result[0].totalcount;
+                returnobj.totalpage = Math.ceil(returnobj.totalcount / self.size);
                 console.log("断点3");
                 return callback(null, returnobj)
             });
@@ -72,13 +72,13 @@ ManageInventory.prototype.getSearchData = function(callback) {
             } else {
                 returnobj.objarr = [];
             }
-            connect.query('SELECT count(*) as totalcount FROM inventory WHERE userid = ?', [self.searchdate,self.userid], function(err, result) {
+            connect.query('SELECT count(*) as totalcount FROM inventory WHERE addDate= ? and userid = ?', [self.searchdate,self.userid], function(err, result) {
                 if (err) { //报错  
                     console.log("'SELECT  FROM inventory WHERE addDate= ? and  id =" + self.id + " error, the err information is " + err);
                     return callback(err);
                 }
-                returnobj.totalpage = result[0].totalcount;
-                returnobj.totalpage = Math.ceil(returnobj.totalpage / self.size);
+                returnobj.totalcount = result[0].totalcount;
+                returnobj.totalpage = Math.ceil(returnobj.totalcount / self.size);
                 console.log("断点3");
                 return callback(null, returnobj)
             });

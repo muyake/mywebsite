@@ -12,9 +12,11 @@ import routes from './router/index'
 // 引用工具文件
 import utils from './utils/index.js'
 import axios from 'axios';
-// import ElementUI from 'element-ui';
-// Vue.use(ElementUI);
-// import 'element-ui/lib/theme-default/index.css'
+
+
+ import ElementUI from 'element-ui';
+ Vue.use(ElementUI);
+ import 'element-ui/lib/theme-default/index.css'
 Vue.component('icon', Icon);
 // 将工具方法绑定到全局
 Vue.prototype.$utils = utils
@@ -25,7 +27,7 @@ const router = new VueRouter({
 	// 引用API文件
 import api from './api/index.js'
 // 将API方法绑定到全局
-Vue.prototype.$api = api
+Vue.prototype.$api = api;
 Vue.prototype.$http = axios;
 
 

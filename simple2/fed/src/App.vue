@@ -52,10 +52,13 @@ export default {
 
 </script>
 <style>
+
+
 #contenter {
   font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
   width: 1300px;
   margin:0 auto;
+  padding: 10px 0;
 }
 
 body,
